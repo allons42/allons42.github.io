@@ -16,22 +16,24 @@
   <meta name="author" content="allons42">
   <meta name="keywords" content="">
   
-    <meta name="description" content="记录一下">
+    <meta name="description" content="第零届北大CTF的解题报告">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2023年的一些读书总结">
-<meta property="og:url" content="https://allons42.github.io/readings_2023/index.html">
+<meta property="og:title" content="PKU GeekGame 0th Writeup">
+<meta property="og:url" content="https://allons42.github.io/geekgame_0th/index.html">
 <meta property="og:site_name" content="Hitchhiker&#39;s camp">
-<meta property="og:description" content="记录一下">
+<meta property="og:description" content="第零届北大CTF的解题报告">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-02-18T07:00:00.000Z">
-<meta property="article:modified_time" content="2024-05-28T07:16:13.336Z">
+<meta property="og:image" content="https://allons42.github.io/img/geek0/flask.png">
+<meta property="article:published_time" content="2021-05-23T15:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-28T07:16:01.791Z">
 <meta property="article:author" content="allons42">
-<meta property="article:tag" content="Book">
+<meta property="article:tag" content="Tech">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allons42.github.io/img/geek0/flask.png">
   
   
   
-  <title>2023年的一些读书总结 - Hitchhiker&#39;s camp</title>
+  <title>PKU GeekGame 0th Writeup - Hitchhiker&#39;s camp</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -195,13 +197,13 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('/img/ow.jpg') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="2023年的一些读书总结"></span>
+            <span id="subtitle" data-typed-text="PKU GeekGame 0th Writeup"></span>
           
         </div>
 
@@ -212,8 +214,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-02-18 15:00" pubdate>
-          2024年2月18日 下午
+        <time datetime="2021-05-23 23:00" pubdate>
+          2021年5月23日 晚上
         </time>
       </span>
     
@@ -224,7 +226,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          474 字
+          1.8k 字
         
       </span>
     
@@ -235,7 +237,7 @@
         
         
         
-          4 分钟
+          16 分钟
         
       </span>
     
@@ -272,22 +274,95 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">2023年的一些读书总结</h1>
+            <h1 id="seo-header">PKU GeekGame 0th Writeup</h1>
             
             
               <div class="markdown-body">
                 
-                <p>这一年和读的书一样科幻，赶在假期的最后一天做个年终的读书总结，提名一下今年最喜欢的几本书。</p>
+                <p>第零届北京大学信息安全综合能力竞赛（PKU
+GeekGame）的Writeup，题目及官方题解：<a
+target="_blank" rel="noopener" href="https://github.com/PKU-GeekGame/geekgame-0th">geekgame-0th</a>。</p>
+<h1 id="misc">Misc</h1>
+<h2 id="第一题签到">第一题：签到</h2>
+<p>base64编码，用在线解码工具解出<code>synt&#123;J3ypbzr gb 0gu CXH ThThTh, rawbl gur tnzr!&#125;</code>，格式与flag相同，对所有字母移位即可试出正确的flag。</p>
+<h2 id="第二题主的替代品">第二题：主的替代品</h2>
+<p>字符串可以通过运算避开连续的<code>main</code>字符串，唯一的考点在于改掉主函数的名字，在代码前加入
+<code>#define my m##ain</code>（两个#用于拼接字符串），用my作为main函数的名字即可。</p>
+<h2 id="第三题小北问答">第三题：小北问答</h2>
 <ol type="1">
-<li>格雷格伊根《祈祷之海》：精品率极高的短篇集，今年最大的惊喜。很久没有看到这么密集的高质量idea了，故事的演绎也极具想象力，属实是相见恨晚。</li>
-<li>莱姆的诸多长篇：《未来学大会》和《完美的真空》发起癫来颇有道格拉斯亚当斯和PKD的风味，相对严肃的《惨败》和《索拉里斯星》也带着对人类中心主义的强烈讽刺。一本正经地嘲笑这个世界，我可太好这一口了（甚至头像都一直是Marvin）。</li>
-<li>《天堂的喷泉》：教科书级别的工程科幻，谁会不爱太空电梯啊！要技术有技术，要冲突有冲突，要浪漫有浪漫，非常喜欢！</li>
-<li>《路边野餐》：苏联时期的科幻，被塔可夫斯基翻拍成了《潜行者》。小说很不错，但是后记里和大搞文字批判的编辑斗智斗勇比正文更好看。</li>
-<li>《黑暗的左手》《失去一切的人》：厄休拉·勒古恩可能是当代科幻作家里最“左”的，前一本空想了一个性别流动的世界，后一本直接空想了一个共产主义世界，与其说是科幻，其实更像是社会实验，空想与实际的对比很有意思。</li>
-<li>星际拓荒（Outer
-Wilds）：乱入一个科幻游戏，但他实在太浪漫了！几乎完美地呈现了宇宙探索所能带来的震撼、恐惧、新奇、惊叹，以及文明在宇宙中的渺小和伟大，一款独立游戏能做到这个程度太惊艳了。</li>
+<li><blockquote>
+<p>理科一号楼共有 8 个计算中心机房，其中第 n
+机房的门牌号是Xn（1000≤Xn≤9999），求 ∑ (Xn)n
+的最大质因数？——108475792463321</p>
+</blockquote>
+<p>实地考察门牌号+大素数分解</p></li>
+<li><blockquote>
+<p>北京大学的哪门课被称为“讲得好、作业少、考试水、给分高的课”（中文全称）？——穆良柱老师的热学</p>
+</blockquote>
+<p>在树洞的课程评估页面里藏着</p></li>
+<li><blockquote>
+<p>根据 HTCPCP-TEA
+协议，当一个茶壶暂时无法煮咖啡时，应当返回什么状态码？——503</p>
+</blockquote>
+<p>直接百度</p></li>
+<li><blockquote>
+<p>在 Conway's Game of Life 中，有多少种稳定的由 7
+个活细胞构成的局面？稳定是指每个时刻的状态都与初始状态完全相同。旋转或对称后相同的视为同一种局面。——4</p>
+</blockquote>
+<p>英文维基上能查到表</p></li>
+<li><blockquote>
+<p>FAStT Management Suite Java 是 IBM
+推出的一款软件，它的默认密码是？——config</p>
+</blockquote>
+<p>软件的README里有写</p></li>
+<li><blockquote>
+<p>最小的汉信码图案由多少像素（被称为“模块”）构成？——529</p>
+</blockquote>
+<p>查到其尺寸（边长）是21+2*Version，即最小边长是23</p></li>
+<li><blockquote>
+<p>哪个国密算法基于椭圆曲线密码？——SM2</p>
+</blockquote>
+<p>直接百度</p></li>
+<li><blockquote>
+<p>在 2013 年 5 月 4 日，全世界共有多少可用的顶级域名（TLD）？——329</p>
+</blockquote>
+<p>从Web
+Archive查到了官方存放可用TLD列表的网站在这一天前后的历史版本（没找到当天的），统计页面中的TLD个数即可。<code>https://web.archive.org/web/20130501000000*/https://www.iana.org/domains/root/db/</code></p></li>
 </ol>
-<p>欢迎交流阅读体验！欢迎找我要电子书！</p>
+<h2 id="第四题与佛论禅网大会员">第四题：与佛论禅网大会员</h2>
+<p>直接用记事本打开quiz.gif，可以看到最后有flag1.txt和flag2.txt的字符串。</p>
+<p>一开始没有后续思路，先做的巴别压缩包这道题，回来再看发现有"PK"这个zip文件的标志性字符串，把PK开始的二进制串复制到另一个文件里，得到两个flag的压缩文件。解压得到flag1，但是没找到flag2的解压密码。</p>
+<h2 id="第五题2038年的银行">第五题：2038年的银行</h2>
+<p>只靠存钱每天都会赔钱，随便尝试发现额度可以通过拆东墙补西墙的方式刷到最大值2e9，这个值很接近32位整数的最大值，果然欠款增大之后会上溢出，然后在±2e9之间左右横跳。题目限制了存钱取钱不能是负数，那么先借2e9，只存1.5e9，过很多天之后存款涨到2e9，欠款还是这么多，还掉欠款之后就有一大笔净利润了。</p>
+<h1 id="web">Web</h1>
+<h2 id="第六题人类行为研究试验">第六题：人类行为研究试验</h2>
+<p>ping一下内网代理查到ip地址，在浏览器里设置代理即可登入。游戏本身很简单，记得这个问题有特定的最优算法，实际上凭感觉也很容易拿到及格分。通过之后跳转到伪登陆系统（研究网站的时候居然顺着修改密码的链接跳到真iaaa上把真密码改了……），发现随便输入反馈都是“不是教师”，在cookie（或者是url，记不清了）里面发现了jwt编码的json数据，可读部分为<code>&#123;"typ":"JWT","alg":"HS256"&#125;&#123;"identity":"student"&#125;</code>，用HS256方式加密。题目提示没有配置任何参数，尝试以空字符串作为密钥，验证了加密结果和原串一样。把identity从student改成teacher，重新加密为jwt格式，篡改cookie后重新进入网页，以教师身份拿到flag。</p>
+<p>脚本：<a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-0th/%E4%BA%BA%E7%B1%BB%E8%A1%8C%E4%B8%BA%E5%AE%9E%E9%AA%8C.ipynb">人类行为实验.ipynb</a>。</p>
+<h2 id="第七题人生苦短">第七题：人生苦短</h2>
+<p>试了几次发现login-输入flag时直接点取消，就会跳出很长的WSGI框架的报错信息。又发现logout之后多出了内容为<code>&#123;admin:flase&#125;</code>的带有签名的cookie文件，所以思路大概是设法偷取签名密钥，把cookie里的admin篡改成true，直接进入已登录状态获取flag。</p>
+<p>网上有好多利用WSGI框架的debug模式注入代码的题解，以为要用PIN码攻破flask框架，被误导了好久。后来以为报错里的SECRET就是密钥，试了很多次都不对。</p>
+<p>最后意识到密钥在源码开头就有写，而报错信息刚好就在密钥部分代码的下方。观察到报错的原因是没有获取到输入的flag，代码对空对象进行strip操作产生的，如果出错的位置再高几行刚好会暴露密钥。按这个思路手动重写POST请求，照葫芦画瓢把json数据里的action也设为null，于是在action这行代码上报错，暴露了密钥。之后用flask--unsign这个软件用密钥对<code>&#123;admin:True&#125;</code>签名，修改cookie数据，成功进入已登录状态，拿到flag。</p>
+<p><img src="/img/geek0/flask.png" srcset="/img/loading.gif" lazyload /></p>
+<h1 id="binary">Binary</h1>
+<h2 id="第十一题未来的机器">第十一题：未来的机器</h2>
+<p>非常朴素暴力的机器码，一行行读完重写成python代码，发现是很简单地把flag的字符位置进行一次哈希映射，再把字母表进行一次哈希映射，就等于字符串key。反向操作就算出了flag。</p>
+<p>反汇编过程： <a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-0th/%E5%8F%8D%E6%B1%87%E7%BC%96.ipynb">反汇编.ipynb</a>，
+计算flag的过程：<a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-0th/%E5%8F%8D%E6%B1%87%E7%BC%962.ipynb">反汇编2.ipynb</a>。</p>
+<h1 id="algorithm">Algorithm</h1>
+<h2 id="第十五题计算概论b">第十五题：计算概论B</h2>
+<p>可以看出程序的功能是把text.txt里的数据转化为16进制，再用table.pickle的字典重新编码成了01串。试着算了一下哈夫曼编码的长度，发现和结果一致，即题目所用的编码规则就是最短编码。但是哈夫曼编码的任何一棵子树都可以交换左右子树而不改变编码长度，因此理论上需要遍历所有可能的哈夫曼树并尝试解码，直到发现解码长度正确、且内容包括
+<code>b"flag&#123;"</code>为止。</p>
+<p>做这道题的时候偷了个懒，没有写遍历哈夫曼树的代码，而是在构建哈夫曼树时用随机数决定左右子树的位置，循环了100遍之后就找到了符合上述要求的答案，从中找到flag。</p>
+<p>脚本：<a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-0th/huffman.ipynb">huffman.ipynb</a>，<a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-0th/huffman2.ipynb">huffman2.ipynb</a>。</p>
+<h2 id="第十六题巴别压缩包">第十六题：巴别压缩包</h2>
+<p>强烈吐槽这道题！照着说明文档和网上的资料一个字节一个字节地把整个zip解压出来，验证了一下quine的特性，结果flag基本与此无关……总之就是头尾两个修复点应该是相同的CRC32校验码，中间的两个修复点是重复打印头尾部分用的，所以四个位置都是相同的4字节校验码。只有40亿种可能，直接暴力枚举、填入文件、计算CRC32、比对即可，几个小时就解出来了。</p>
+<p>脚本：<a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-0th/zip.ipynb">zip.ipynb</a>。</p>
 
                 
               </div>
@@ -306,7 +381,7 @@ Wilds）：乱入一个科幻游戏，但他实在太浪漫了！几乎完美地
     
       <span class="category-chain">
         
-  <a href="/categories/Book/" class="category-chain-item">Book</a>
+  <a href="/categories/Tech/" class="category-chain-item">Tech</a>
   
   
 
@@ -321,7 +396,7 @@ Wilds）：乱入一个科幻游戏，但他实在太浪漫了！几乎完美地
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/Book/" class="print-no-link">#Book</a>
+        <a href="/tags/Tech/" class="print-no-link">#Tech</a>
       
     </div>
   
@@ -333,8 +408,8 @@ Wilds）：乱入一个科幻游戏，但他实在太浪漫了！几乎完美地
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>2023年的一些读书总结</div>
-      <div>https://allons42.github.io/readings_2023/</div>
+      <div>PKU GeekGame 0th Writeup</div>
+      <div>https://allons42.github.io/geekgame_0th/</div>
     </div>
     <div class="license-meta">
       
@@ -346,7 +421,7 @@ Wilds）：乱入一个科幻游戏，但他实在太浪漫了！几乎完美地
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年2月18日</div>
+          <div>2021年5月23日</div>
         </div>
       
       
@@ -378,21 +453,15 @@ Wilds）：乱入一个科幻游戏，但他实在太浪漫了！几乎完美地
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/to_the_moon/" title="To the Moon... Again">
+                      <a href="/geekgame_1st/" title="PKU GeekGame 1st Writeup">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">To the Moon... Again</span>
+                        <span class="hidden-mobile">PKU GeekGame 1st Writeup</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/geekgame_3rd/" title="PKU GeekGame 3rd Writeup">
-                        <span class="hidden-mobile">PKU GeekGame 3rd Writeup</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>

