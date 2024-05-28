@@ -1,7 +1,7 @@
 ---
 title: PKU GeekGame 3rd Writeup
-excerpt: 第三届北大CTF的解题报告，也搬运一下之前的
-tags: [Tech]
+excerpt: 第三届北大CTF的解题笔记，也搬运一下之前的
+tags: [Tech, CTF]
 category: [Tech]
 math: true
 comment: true

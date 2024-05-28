@@ -1,7 +1,7 @@
 ---
 title: PKU GeekGame 2nd Writeup
-excerpt: 第二届北大CTF的解题报告
-tags: [Tech]
+excerpt: 第二届北大CTF的解题笔记
+tags: [Tech, CTF]
 category: [Tech]
 math: true
 comment: true
