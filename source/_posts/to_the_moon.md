@@ -2,11 +2,11 @@
 title: To the Moon... Again
 excerpt: 随便写点
 tags: [Game]
+category: [Game]
 math: true
 comment: true
 index_img: /img/moon.jpg
 banner_img: /img/moon.jpg
-
 date: 2024-05-26 23:00:00
 ---
 
