@@ -1,3 +1,14 @@
+---
+title: PKU GeekGame 4th Writeup
+excerpt: 第四届北大&清华CTF的解题笔记
+tags: [Tech, CTF]
+category: [Tech]
+math: true
+comment: true
+date: 2024-10-21 23:59:00
+---
+
+
 2024“京华杯”信息安全综合能力竞赛（GeekGame-4th）的Writeup，题目及官方题解：[geekgame-4th](https://github.com/PKU-GeekGame/geekgame-4th)。
 
 学生时代的最后一年，终于拿到一次二等奖，还抢到两个一血，可喜可贺，可喜可贺。
