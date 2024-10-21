@@ -13,9 +13,9 @@ date: 2024-10-21 23:59:00
 
 学生时代的最后一年，终于拿到一次二等奖，还抢到两个一血，可喜可贺，可喜可贺。
 
-![](img/geek4/score1.png)
+![](/img/geek4/score1.png)
 
-![干啥啥不行，熬夜第一名](img/geek4/score2.png)
+![干啥啥不行，熬夜第一名](/img/geek4/score2.png)
 
 
 
@@ -46,7 +46,7 @@ for f in fs:
 
 问答最顺利的一集，两次尝试就过了！
 
-![全局一血，爽！](img/geek4/trivia.png)
+![全局一血，爽！](/img/geek4/trivia.png)
 
 > 1. 在清华大学百年校庆之际，北京大学向清华大学赠送了一块石刻。石刻**最上面**一行文字是什么？
 
@@ -121,7 +121,7 @@ flag2刻意用了中文和后面的英文区分开。开始写的是“引号内
 
 做到这里，思路是很明显了，拿铁路构成的猪圈密码作为密码本，解密上面的字符串就行，但是卡在了密码本这一步。卡住的时候用[dCode](https://www.dcode.fr/cipher-identifier)胡乱搜了搜，结果用维吉尼亚密码直接爆破出一个看起来十分对劲的字符串。这也太合理了，标题里的erail都出来了。
 
-![dCode为什么是神](img/geek4/erail.png)
+![dCode为什么是神](/img/geek4/erail.png)
 
 > 啪一下，很快啊，我就拿去提交了，我大意了啊，没有检查，一个flag错误就甩过来……
 
@@ -210,7 +210,7 @@ QjicR: "__selenium_unwrapped",
 yYEHM: "__fxdriver_unwrapped",
 ```
 
-![有黑客！](img/geek4/copy.png)
+![有黑客！](/img/geek4/copy.png)
 
 2. 卡题的时候尝试在手机上打开页面，有些手机浏览器（例如X浏览器）可以打开开发者工具且不被发现，但页面元素中还是找不到数据。可以抓取到root元素，有个很长的字符串疑似是生成数据用的种子，但实在不想读源码去研究怎么生成的。也尝试了各种手机浏览器自带的文字提取、阅读模式等插件，都无法奏效。
 
@@ -239,7 +239,7 @@ yYEHM: "__fxdriver_unwrapped",
 
 看起来是个博客网站，先注册个账号随便逛逛。嗯……可以写博客，可以看别人，可以生成Access Token用来登录。但是看不到admin的私有文章。没找到社工admin密码的机会，那就先看看cookie：
 
-![](img/geek4/memos.png)
+![](/img/geek4/memos.png)
 
 一眼JWT格式，这个2是怎么回事？注册了一个新账号，发现cookie里的"subs"变成了3，那1肯定就是admin了。尝试修改了"subs"重新生成JWT，可惜有HS256加密，并不能生效。
 
@@ -398,7 +398,7 @@ strings pymaster_extracted/PYZ-00.pyz_extracted/random.pyc | grep flag
 
 前面拿到的python程序经过了变量名混淆，可读性很差。简单做了一些字符替换后丢给Gemini，结果一眼看出是个二叉搜索树，还指出了哪个是父节点、哪个是子节点，节省了许多审计代码的时间。
 
-![Salute！](img/pymaster.png)
+![Salute！](/img/pymaster.png)
 
 这个解读满分，整个程序做的事情都被Gemini解释完了，一顿操作下来其实就是给输入的字符串重新排了个序，我们需要还原出能通过程序检查的flag。
 
@@ -414,7 +414,7 @@ strings pymaster_extracted/PYZ-00.pyz_extracted/random.pyc | grep flag
 
 先上checksec，没有Canary和PIE。
 
-![](img/geek4/rtree1.png)
+![](/img/geek4/rtree1.png)
 
 反汇编之后审计一遍代码，代码中提供了直接反弹shell的backdoor。主函数在栈上维护了一个链表，实现了insert和show两个功能，每个节点结构如下所示：
 
@@ -440,7 +440,7 @@ payload = b'x' * 496 + p64(0x0000000000401231)
 
 照例先上checksec，这次有了Canary，还是没有PIE。
 
-![rtree1](img/geek4/rtree2-1.png)
+![](/img/geek4/rtree2-1.png)
 
 这次依然有backdoor，但仅仅是调用了system，并不能获得shell。主函数升级成了堆上的链表，每个节点结构如下所示，大小为固定的40字节，而data会按照size的大小另外申请堆节点。
 
@@ -474,7 +474,7 @@ payload = b'x' * 496 + p64(0x0000000000401231)
 
 接下来看看我们能做什么：主函数用非常抽象的四层while true搞了个选项分类，实现了insert、show和edit。其中insert十分规矩地申请节点并填入数据，show从data_ptr读取大小为size的数据，edit允许从 `*data_ptr+index` 的位置开始写入8个字节。edit在修改前会检查 `index < size`，检查了吗？如查。这里虽然不能向后溢出，但是可以输入负值，从而修改上一个堆块的数据。
 
-![](img/geek4/rtree2-2.png)
+![](/img/geek4/rtree2-2.png)
 
 现在我们有了几乎任意写的工具，最容易想到的就是把当前堆块的edit函数指针改掉，例如劫持为backdoor。我们的目标是执行`system("cat flag")`，而edit的第一个参数刚好就是data_ptr，我们可以控制data的内容为任意shell code。由于每个节点只允许edit一次，所以依次执行以下步骤：
 
