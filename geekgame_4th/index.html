@@ -29,12 +29,13 @@
 <meta property="og:image" content="https://allons42.github.io/img/geek4/erail.png">
 <meta property="og:image" content="https://allons42.github.io/img/geek4/copy.png">
 <meta property="og:image" content="https://allons42.github.io/img/geek4/memos.png">
-<meta property="og:image" content="https://allons42.github.io/img/pymaster.png">
-<meta property="og:image" content="https://allons42.github.io/img/geek4/rtree1.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek4/pymaster.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek4/rtree1-1.png">
 <meta property="og:image" content="https://allons42.github.io/img/geek4/rtree2-1.png">
 <meta property="og:image" content="https://allons42.github.io/img/geek4/rtree2-2.png">
+<meta property="og:image" content="https://allons42.github.io/img/geek4/rtree2-3.png">
 <meta property="article:published_time" content="2024-10-21T15:59:00.000Z">
-<meta property="article:modified_time" content="2024-10-21T17:35:24.296Z">
+<meta property="article:modified_time" content="2024-10-21T18:49:10.563Z">
 <meta property="article:author" content="allons42">
 <meta property="article:tag" content="Tech">
 <meta property="article:tag" content="CTF">
@@ -417,7 +418,7 @@ world的脚本，还都是FDS系统的。试了好几个，似乎都和服务器
 <h2 id="验证码">验证码</h2>
 <h3 id="flag1出乎意料的简单">flag1（出乎意料的简单）</h3>
 <p>打开网页，可以看到两个输入验证码的关卡。题目明示了要想办法复制css里的原始数据，但复制、搜索、甚至控制台都打不开。</p>
-<p>但！是！——简单尝试发现，只要在进入关卡前打开控制台，就可以正常浏览和修改页面元素。复制centralNoiseContainer中的原始数据，并在在input里添加value元素和相应内容，点击提交即可。</p>
+<p>但！是！——简单尝试发现，只要在进入关卡前打开控制台，就可以正常浏览和修改页面元素。复制centralNoiseContainer中的原始数据，并在input里添加value元素和相应内容，点击提交即可。</p>
 <h3 id="flag2出乎意料的卡">flag2（出乎意料的卡）</h3>
 <p>flag2的封锁更严格，尝试了以下几种思路都没成功：</p>
 <ol type="1">
@@ -439,11 +440,13 @@ world的脚本，还都是FDS系统的。试了好几个，似乎都和服务器
 <p>拿到数据源码之后总算搞懂了不能选中的原因，这些文本都是CSS生成的<a
 target="_blank" rel="noopener" href="https://www.runoob.com/css/css-pseudo-elements.html">伪元素</a>，并且通过::before和::after打乱了顺序。伪元素和布局大概长这样：</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs html"><span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">class</span>=<span class="hljs-string">&quot;chunk&quot;</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;chunk-n33cpl5d&quot;</span> <span class="hljs-attr">data-45w9ki6t</span>=<span class="hljs-string">&quot;l!J|iJO&quot;</span> <span class="hljs-attr">data-fwbn0qu9</span>=<span class="hljs-string">&quot;(l1!&quot;</span> <span class="hljs-attr">data-iapkvtl2</span>=<span class="hljs-string">&quot;(J1IJJ)&quot;</span> <span class="hljs-attr">data-1z4us40s</span>=<span class="hljs-string">&quot;0O)I!O(&quot;</span> <span class="hljs-attr">data-a58luuk7</span>=<span class="hljs-string">&quot;)II)(l0&quot;</span> <span class="hljs-attr">data-00ou4sma</span>=<span class="hljs-string">&quot;i0Ii&quot;</span> <span class="hljs-attr">data-tczxz776</span>=<span class="hljs-string">&quot;|l!iO!O&quot;</span> <span class="hljs-attr">data-1n3411ft</span>=<span class="hljs-string">&quot;l!|O1i0&quot;</span>&gt;</span>兄弟你好香<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><br><br><span class="hljs-tag">&lt;<span class="hljs-name">style</span>&gt;</span><span class="language-css"> </span><br><span class="language-css">    <span class="hljs-selector-id">#chunk-le6ky7ij</span><span class="hljs-selector-pseudo">::after</span>&#123;<span class="hljs-attribute">content</span>:<span class="hljs-built_in">attr</span>(data-cizj42sz) <span class="hljs-built_in">attr</span>(data-k4zctd2r) <span class="hljs-built_in">attr</span>(data-ejj272j3) <span class="hljs-built_in">attr</span>(data-apthovz9)&#125; </span><br><span class="language-css">    <span class="hljs-selector-id">#chunk-xnr1e8at</span><span class="hljs-selector-pseudo">::after</span>&#123;<span class="hljs-attribute">content</span>:<span class="hljs-built_in">attr</span>(data-<span class="hljs-number">9</span>atdpsua) <span class="hljs-built_in">attr</span>(data-f4ifar4o) <span class="hljs-built_in">attr</span>(data-rsh7et7j) <span class="hljs-built_in">attr</span>(data-<span class="hljs-number">7</span>ubx7mfi)&#125;</span><br><span class="language-css"></span><span class="hljs-tag">&lt;/<span class="hljs-name">style</span>&gt;</span><br></code></pre></td></tr></table></figure>
-<p>虽然还是很麻烦，但至少可以写个脚本稳定过关。可以查看<a
+<p>虽然还是很麻烦，但至少能写个脚本稳定过关。保存了<a
 target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/tree/main/PKUgeekgame-4th/codes/nocopy.html">导出的html文件</a>和<a
 target="_blank" rel="noopener" href="https://github.com/allons42/CTF-Writeup/tree/main/PKUgeekgame-4th/codes/nocopy.py">解码脚本</a>。</p>
 <h2 id="ics笑传之查查表">ICS笑传之查查表</h2>
-<p>又一个一血！但是过的迷迷糊糊，怀疑非预期了。</p>
+<blockquote>
+<p>First Blood！但是过的迷迷糊糊，怀疑非预期了。</p>
+</blockquote>
 <p>看起来是个博客网站，先注册个账号随便逛逛。嗯……可以写博客，可以看别人，可以生成Access
 Token用来登录。但是看不到admin的私有文章。没找到社工admin密码的机会，那就先看看cookie：</p>
 <p><img src="/img/geek4/memos.png" srcset="/img/loading.gif" lazyload /></p>
@@ -514,17 +517,18 @@ target="_blank" rel="noopener" href="https://github.com/extremecoders-re/pyinstx
 <h3 id="flag3-1">flag3</h3>
 <p>前面拿到的python程序经过了变量名混淆，可读性很差。简单做了一些字符替换后丢给Gemini，结果一眼看出是个二叉搜索树，还指出了哪个是父节点、哪个是子节点，节省了许多审计代码的时间。</p>
 <figure>
-<img src="/img/pymaster.png" srcset="/img/loading.gif" lazyload alt="Salute！" />
+<img src="/img/geek4/pymaster.png" srcset="/img/loading.gif" lazyload alt="Salute！" />
 <figcaption aria-hidden="true">Salute！</figcaption>
 </figure>
-<p>这个解读满分，整个程序做的事情都被Gemini解释完了，一顿操作下来其实就是给输入的字符串重新排了个序，我们需要还原出能通过程序检查的flag。</p>
+<p>整个程序做的事情都被Gemini解释完了。一顿操作下来其实就是给输入的字符串重新排了个序，我们需要还原出能通过程序检查的flag。</p>
 <p>要恢复这个顺序，只需要注意到选择节点用来旋转时用的还是random，也就是“被神秘力量影响”的那个。所以把这个<code>random.pyc</code>和调试用的脚本放到一起，就可以固定随机数，完美复现结果了……吗？</p>
 <p>在这一步被卡了两个多小时，试遍了各种调试环境的办法都不对，最后才想起来程序在import
-random之后先运行了一次randint！！！太坑人了！</p>
+random之后先运行randint过掉了一个随机数！！！</p>
+<p>太坑人了！</p>
 <h2 id="生活在树上">生活在树上</h2>
 <h3 id="flag1-栈溢出ret2text">flag1 栈溢出+ret2text</h3>
 <p>先上checksec，没有Canary和PIE。</p>
-<p><img src="/img/geek4/rtree1.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/geek4/rtree1-1.png" srcset="/img/loading.gif" lazyload /></p>
 <p>反汇编之后审计一遍代码，代码中提供了直接反弹shell的backdoor。主函数在栈上维护了一个链表，实现了insert和show两个功能，每个节点结构如下所示：</p>
 <table>
 <thead>
@@ -539,7 +543,7 @@ random之后先运行了一次randint！！！太坑人了！</p>
 <td>8 Bytes</td>
 </tr>
 <tr class="even">
-<td>*data（数据起点的指针）</td>
+<td>data_ptr（数据起点的指针）</td>
 <td>8 Bytes</td>
 </tr>
 <tr class="odd">
@@ -559,10 +563,14 @@ random之后先运行了一次randint！！！太坑人了！</p>
 rbp的步骤。最终的payload：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 先申请一个长度为512-24=488的节点，然后注入以下数据：</span><br>payload = <span class="hljs-string">b&#x27;x&#x27;</span> * <span class="hljs-number">496</span> + p64(<span class="hljs-number">0x0000000000401231</span>)<br></code></pre></td></tr></table></figure>
 <h3 id="flag2-堆溢出ret2libc">flag2 堆溢出+ret2libc</h3>
-<p>其实很简单，但是由于实在缺乏pwn经验，花一整天走了超多弯路，啃下来反而是整个比赛里学到东西最多的。</p>
+<blockquote>
+<p>其实很简单，但是实在缺乏pwn经验。花一整天走了超多弯路，啃下来反而是整个比赛里学到东西最多的。</p>
+</blockquote>
 <p>照例先上checksec，这次有了Canary，还是没有PIE。</p>
 <p><img src="/img/geek4/rtree2-1.png" srcset="/img/loading.gif" lazyload /></p>
-<p>这次依然有backdoor，但仅仅是调用了system，并不能获得shell。主函数升级成了堆上的链表，每个节点结构如下所示，大小为固定的40字节，而data会按照size的大小另外申请堆节点。</p>
+<p>依然有backdoor，但仅仅是调用了system，并不能获得shell。</p>
+<p><img src="/img/geek4/rtree2-2.png" srcset="/img/loading.gif" lazyload /></p>
+<p>主函数升级成了堆上的链表，每个节点结构如下所示，大小为固定的40字节，而data会按照size的大小另外申请堆节点。</p>
 <table>
 <thead>
 <tr class="header">
@@ -691,7 +699,7 @@ header也会占用至少8个字节，并且16字节对齐。如果连续申请32
 true搞了个选项分类，实现了insert、show和edit。其中insert十分规矩地申请节点并填入数据，show从data_ptr读取大小为size的数据，edit允许从
 <code>*data_ptr+index</code> 的位置开始写入8个字节。edit在修改前会检查
 <code>index &lt; size</code>，检查了吗？如查。这里虽然不能向后溢出，但是可以输入负值，从而修改上一个堆块的数据。</p>
-<p><img src="/img/geek4/rtree2-2.png" srcset="/img/loading.gif" lazyload /></p>
+<p><img src="/img/geek4/rtree2-3.png" srcset="/img/loading.gif" lazyload /></p>
 <p>现在我们有了几乎任意写的工具，最容易想到的就是把当前堆块的edit函数指针改掉，例如劫持为backdoor。我们的目标是执行<code>system("cat flag")</code>，而edit的第一个参数刚好就是data_ptr，我们可以控制data的内容为任意shell
 code。由于每个节点只允许edit一次，所以依次执行以下步骤：</p>
 <ol type="1">
@@ -709,7 +717,7 @@ code。由于每个节点只允许edit一次，所以依次执行以下步骤：
 <p>比赛中为了flag2绕了非常大的弯子，事后才发现走远了……总之值得记录一下。</p>
 <p>主要是想复杂了，以为需要在data块内创建一整个假节点，再把上一个节点的next指针接过来。这样需要在next处填假节点的真实地址，可问题在于
 <strong>ASLR</strong>
-机制随机化了堆的起始地址，没法准确定位。但是，我们还有办法！如果把data到下一个节点的data_ptr之间填满，就可以通过show函数里的printf把data_ptr打印出来。于是进行了以下奇妙操作：</p>
+机制随机化了堆的起始地址，没法准确定位。但是还有办法！如果把data到下一个节点的data_ptr之间填满，就可以利用show函数里的printf把data_ptr打印出来。于是进行了以下奇妙操作：</p>
 <ol type="1">
 <li>insert 4次，连续创建4个数据大小为32字节的节点1, 2, 3, 4</li>
 <li>edit 2，偏移量-64，填充data 1后的chunk header前8个字节</li>
@@ -731,7 +739,8 @@ code。由于每个节点只允许edit一次，所以依次执行以下步骤：
 </ol>
 <p>这么一套操作下来，由于假节点的data_ptr也是可控的，已经实现了任意读和任意写，接下来只要想办法搞到libc的真实地址就可以call
 system了。怎么拿到真实地址呢，去PLT表查GOT表的地址……等等，<a
-target="_blank" rel="noopener" href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/basic-rop/#ret2libc">PLT表原来可以直接调用</a>？！此题，终。</p>
+target="_blank" rel="noopener" href="https://ctf-wiki.org/pwn/linux/user-mode/stackoverflow/x86/basic-rop/#ret2libc">PLT表原来可以直接调用</a>？！</p>
+<p>此题，终。</p>
 <h2 id="打破复杂度">打破复杂度</h2>
 <blockquote>
 <p>好，好传统的算法题，这还是CTF吗，给我干哪来了？</p>
@@ -858,8 +867,11 @@ class="math inline">\(102±2\)</span>的范围内。
 这样枚举后，可以锁定周期L是34或68，固定L之后再固定部分可以辨认出的字符，进一步求解剩下的单词即可。</p>
 <p>一点花絮：预期的暴力解法是枚举随机种子，所以答案是<code>flag&#123;DO_y0U_EnumeraTed_a1L_sE3d5?&#125;</code>。但我用了方程组的解法，最后需要枚举有一定误差的解，所以把答案当成了<code>flag&#123;DO_y0U_EnumeraTed_a1L_rE3d5?&#125;</code>。需要枚举不同的reads，这也很合理吧……</p>
 <h3 id="flag2-python">flag2 python</h3>
-<p>python的随机数是明确使用梅森旋转算法（MT19937）生成的。之前只知道连续的624个随机数可以完全还原内部状态，但这道题里我们只能确定前五个数字的精确数值。一度觉得没法求解，打算暴力获取大量随机数求平均值偏移了……果然还是太离谱了。
-以前只会调包解梅森旋转，现在还是得自己看懂原理。找到一些很有用的参考资料：</p>
+<blockquote>
+<p>被迫彻底学会MT19937了。</p>
+</blockquote>
+<p>python的随机数是明确使用梅森旋转算法（MT19937）生成的。之前只知道连续的624个随机数可以完全还原内部状态，但这道题里我们只能确定前五个数字的精确数值。一度觉得没法求解，打算暴力获取大量随机数求平均值偏移……果然还是太离谱了。
+以前解MT19937只会调包，现在还是得看懂原理。找到一些很有用的参考资料：</p>
 <p><a
 target="_blank" rel="noopener" href="https://jazzy.id.au/2010/09/22/cracking_random_number_generators_part_3.html">Cracking
 Random Number Generators</a></p>
@@ -868,7 +880,7 @@ target="_blank" rel="noopener" href="https://liam.page/2018/01/12/Mersenne-twist
 <p>正经学了一遍，发现梅森旋转算法的状态虽然有624位，但每个随机数其实是由对应的单个状态可逆变换生成的，因此可以直接逆向恢复内部状态。找了个能用的python代码：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">temper</span>(<span class="hljs-params">tmp</span>):<br>    tmp ^= (tmp &gt;&gt; <span class="hljs-number">11</span>)<br>    tmp ^= (tmp &lt;&lt; <span class="hljs-number">7</span>) &amp; <span class="hljs-number">0x9d2c5680</span><br>    tmp ^= (tmp &lt;&lt; <span class="hljs-number">15</span>) &amp; <span class="hljs-number">0xefc60000</span><br>    tmp ^= (tmp &gt;&gt; <span class="hljs-number">18</span>)<br>    <span class="hljs-keyword">return</span> tmp<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">TemperInverser</span>:<br>    __b = <span class="hljs-number">0x9d2c5680</span><br>    __c = <span class="hljs-number">0xefc60000</span><br>    __kMaxBits = <span class="hljs-number">0xffffffff</span><br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__inverse_right_shift_xor</span>(<span class="hljs-params">self, value, shift</span>):<br>        i, result = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> i * shift &lt; <span class="hljs-number">32</span>:<br>            part_mask = ((self.__kMaxBits &lt;&lt; (<span class="hljs-number">32</span> - shift)) &amp; self.__kMaxBits) &gt;&gt; (i * shift)<br>            part = value &amp; part_mask<br>            value ^= part &gt;&gt; shift<br>            result |= part<br>            i += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> result<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__inverse_left_shift_xor</span>(<span class="hljs-params">self, value, shift, mask</span>):<br>        i, result = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span> i * shift &lt; <span class="hljs-number">32</span>:<br>            part_mask = (self.__kMaxBits &gt;&gt; (<span class="hljs-number">32</span> - shift)) &lt;&lt; (i * shift)<br>            part = value &amp; part_mask<br>            value ^= (part &lt;&lt; shift) &amp; mask<br>            result |= part<br>            i += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> result<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__inverse_temper</span>(<span class="hljs-params">self, tempered</span>):<br>        value = tempered<br>        value = self.__inverse_right_shift_xor(value, <span class="hljs-number">18</span>)<br>        value = self.__inverse_left_shift_xor(value, <span class="hljs-number">15</span>, self.__c)<br>        value = self.__inverse_left_shift_xor(value, <span class="hljs-number">7</span>, self.__b)<br>        value = self.__inverse_right_shift_xor(value, <span class="hljs-number">11</span>)<br>        <span class="hljs-keyword">return</span> value<br><br>    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__call__</span>(<span class="hljs-params">self, tempered</span>):<br>        <span class="hljs-keyword">return</span> self.__inverse_temper(tempered)<br><br>inverser = TemperInverser()<br></code></pre></td></tr></table></figure>
 <p>至于每个内部状态s[n]的更新，其实只跟三个状态有关：s[n], s[n+1],
-s[n+397]，这种更新可以在一轮624个随机数生成完之后批量进行，也可以在每个随机数生成后实时进行，并不会影响结果。</p>
+s[n+397]。这种更新可以在一轮624个随机数生成完之后批量进行，也可以在每个随机数生成后实时进行，并不会影响结果。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">twister</span>(<span class="hljs-params">n0, n1, n397</span>):<br>    y = (n0 &amp; <span class="hljs-number">0x80000000</span>) + (n1 &amp; <span class="hljs-number">0x7fffffff</span>)<br>    newn = n397 ^ (y &gt;&gt; <span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">if</span> y % <span class="hljs-number">2</span>:<br>        newn ^= <span class="hljs-number">0x9908b0df</span><br>    <span class="hljs-keyword">return</span> newn<br><br><span class="hljs-comment"># 推导公式：state[n+624] = twister(state[n], state[n+1], state[n+397])</span><br></code></pre></td></tr></table></figure>
 <p>这种生成逻辑不方便构建方程组，因为状态本身也在不停变化。但是我们可以确定前五个随机数的精确值，以及之后所有随机数的大致范围。猜测如果枚举所有可能的偏移量，能满足状态更新等式的并不多。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">char_set = string.ascii_letters + string.digits + <span class="hljs-string">&quot; _&#123;&#125;&quot;</span><br></code></pre></td></tr></table></figure>
@@ -948,20 +960,20 @@ n^p=n\ (mod \ p)
 \]</span></p>
 <p>这个等式是素数的必要不充分条件，可以用来不准确地判定素数。遍历500以内的整数，发现在<span
 class="math inline">\(n=2\)</span>时，只有341这一个例外。先不考虑341这个例外，尝试构建表达式：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">is_prime1 = <span class="hljs-keyword">lambda</span> n: (<span class="hljs-number">2</span>**n - <span class="hljs-number">2</span>) % n == <span class="hljs-number">0</span><br><br><span class="hljs-comment"># x // (x - 1)：x不等于1时，可以把x归一化到0和1</span><br><span class="hljs-comment"># 1 // (x**2 + 1)：也可以把x归一化到0和1，并且少写一遍x; x &gt; 1时不需要平方</span><br>is_prime2 = <span class="hljs-keyword">lambda</span> n: <span class="hljs-number">1</span> // ((<span class="hljs-number">2</span>**n - <span class="hljs-number">2</span>) % n + <span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">is_prime1 = <span class="hljs-keyword">lambda</span> n: (<span class="hljs-number">2</span>**n - <span class="hljs-number">2</span>) % n == <span class="hljs-number">0</span><br><br><span class="hljs-comment"># x // (x - 1)：x不等于1时，可以把x归一化到0和1</span><br><span class="hljs-comment"># 1 // (x**2 + 1)：也可以把x归一化到0和1，并且少写一遍x; x &gt; 1时不需要平方</span><br><span class="hljs-comment"># 官方Writeup用的是1 // x，更简洁优雅</span><br>is_prime2 = <span class="hljs-keyword">lambda</span> n: <span class="hljs-number">1</span> // ((<span class="hljs-number">2</span>**n - <span class="hljs-number">2</span>) % n + <span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
 <p>接下来考虑特判，实际上只需要在n=341的时候把结果修正为0，即减去
 <code>int(n-341 == 0)</code>，最终得到：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">is_prime = <span class="hljs-keyword">lambda</span> n: <span class="hljs-number">1</span>//((<span class="hljs-number">2</span>**n-<span class="hljs-number">2</span>)%n+<span class="hljs-number">1</span>)-<span class="hljs-number">1</span>//((n-<span class="hljs-number">341</span>)**<span class="hljs-number">2</span>+<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
 <h3 id="flag2-4">flag2</h3>
 <p>为了计算Pell数，可以利用其通项公式：</p>
 <p><span class="math display">\[
-P_{n+1}=\frac{(1+\sqrt2)^n-(1-\sqrt2)^n}{2\sqrt2}
+P_n=\frac{(1+\sqrt2)^n-(1-\sqrt2)^n}{2\sqrt2}
 \]</span></p>
 <p>但是这样写出的表达式太长了。注意到n较大时后一项是趋向于0的，所以可以直接忽略掉。为了调和数列中前几项的误差，在分子上加一个较小的项。最终得到：</p>
 <p><span class="math display">\[
-P_n\approx\lfloor\frac{(1+\sqrt2)^{n-1}+1}{2\sqrt2}\rfloor
+P_n\approx\lfloor\frac{(1+\sqrt2)^n+1}{2\sqrt2}\rfloor
 \]</span></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 强行取整，忽略掉后一项，加上一个固定的小项</span><br>pell = <span class="hljs-keyword">lambda</span> n: ((<span class="hljs-number">1</span>+<span class="hljs-number">2</span>**(<span class="hljs-number">1</span>/<span class="hljs-number">2</span>))**(n-<span class="hljs-number">1</span>)+<span class="hljs-number">1</span>)//(<span class="hljs-number">2</span>**(<span class="hljs-number">3</span>/<span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 题目里的Pell数向后移了一位，要把n换成n-1</span><br><span class="hljs-comment"># 强行取整，忽略掉后一项，加上一个固定的小项</span><br>pell = <span class="hljs-keyword">lambda</span> n: ((<span class="hljs-number">1</span>+<span class="hljs-number">2</span>**(<span class="hljs-number">1</span>/<span class="hljs-number">2</span>))**(n-<span class="hljs-number">1</span>)+<span class="hljs-number">1</span>)//(<span class="hljs-number">2</span>**(<span class="hljs-number">3</span>/<span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
 <h3 id="flag3-2">flag3</h3>
 <p>尝试了各种运算，都不可能把浮点数变回整型，遂放弃。二阶段提示提供了一个
 <strong>绝妙的</strong> 用整数公式计算Fibonacci的思路：<a
@@ -986,7 +998,7 @@ class="math inline">\(10^k&gt;P_n\)</span>）</p>
 \lfloor10^{kn}F(10^{-k})\rfloor=P_n\ (mod\ 10^k)
 \]</span></p>
 <p>没有多做优化，取<span
-class="math inline">\(k=n\)</span>，这样就足够计算Pell数了：</p>
+class="math inline">\(k=n\)</span>，就足够计算Pell数了：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pell = <span class="hljs-keyword">lambda</span> n: <span class="hljs-number">10</span>**(n*n)//(<span class="hljs-number">100</span>**n-<span class="hljs-number">2</span>*<span class="hljs-number">10</span>**n-<span class="hljs-number">1</span>)%(<span class="hljs-number">10</span>**n)<br></code></pre></td></tr></table></figure>
 
                 
