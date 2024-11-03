@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://allons42.github.io/img/geek4/rtree2-2.png">
 <meta property="og:image" content="https://allons42.github.io/img/geek4/rtree2-3.png">
 <meta property="article:published_time" content="2024-10-21T15:59:00.000Z">
-<meta property="article:modified_time" content="2024-10-26T08:40:48.410Z">
+<meta property="article:modified_time" content="2024-11-03T08:25:15.580Z">
 <meta property="article:author" content="allons42">
 <meta property="article:tag" content="Tech">
 <meta property="article:tag" content="CTF">
@@ -248,7 +248,7 @@
         
         
         
-          88 分钟
+          89 分钟
         
       </span>
     
@@ -848,18 +848,22 @@ target="_blank" rel="noopener" href="https://sourceware.org/git/?p=glibc.git;a=b
 <p>查了一大圈总算找到了真正的实现，可以参考<a
 target="_blank" rel="noopener" href="https://www.mscs.dal.ca/~selinger/random/">这里</a>。每个随机数只与序列中前几个数有关，但是最低位舍去导致可能有1的误差：
 <span class="math display">\[
-o_n = o_{n-31} + o_{n-3} \ \ (+1) \ \ (mod \  2^{31}) \\
-a_n = o_n + f_{n \% L}
+\begin{align}
+&amp;o_n = o_{n-31} + o_{n-3} \ \ (+1) \ \ (mod \  2^{31}) \\
+&amp;a_n = o_n + f_{n \% L}
+\end{align}
 \]</span>
 所以不用考虑初始化的算法，只需关注随机数之间的关系。我们可以从题目中获得连续的无限多个<span
 class="math inline">\(a_n\)</span>，输出结果是在这之上加了一个偏移量。这些<span
 class="math inline">\(a_n\)</span>和未知数<span
 class="math inline">\(f\)</span>构成了如下线性方程，未知数只有flag的长度L和相应的L位flag。
 <span class="math display">\[
-o_n+f_{n \% L}=o_{n-31}+f_{(n-31) \% L}+o_{n-3}+f_{(n-3) \% L} +\epsilon
-\ (mod \  2^{31}) \\
-即，f_{n \% L}-f_{(n-31) \% L}-f_{(n-3) \% L}=o_{n-31}+o_{n-3}-o_n
+\begin{align}
+&amp;o_n+f_{n \% L}=o_{n-31}+f_{(n-31) \% L}+o_{n-3}+f_{(n-3) \% L}
++\epsilon \ (mod \  2^{31}) \\
+即，&amp;f_{n \% L}-f_{(n-31) \% L}-f_{(n-3) \% L}=o_{n-31}+o_{n-3}-o_n
 +\epsilon \ (mod \  2^{31})
+\end{align}
 \]</span>
 具体来说，枚举所有的L，对每个L，取前L个方程，就构成了L元的线性方程组，可以用<code>scipy.optimize.nnls</code>等方法求解。虽然会有一点点误差，但正确的L解出的答案肯定在正确的flag附近。例如<span
 class="math inline">\(f_0=ord(&#39;f&#39;)=102\)</span>，相应的解就应当在<span
@@ -950,10 +954,8 @@ class="math inline">\(p\)</span>，可以化简为以下形式：</p>
 f^2 - (v_0+v_1)f + 1=0 \ \ (mod\ p)
 \]</span></p>
 <p>感觉只差最后一步了，可惜还是没解出来。</p>
-<blockquote>
-<p>赛后补个正确解法</p>
-</blockquote>
-<p>好好读读 <a
+<h3 id="flag2-4">flag2 *</h3>
+<p>赛后补个正确解法。好好读读 <a
 target="_blank" rel="noopener" href="https://doc.sagemath.org/html/en/reference/polynomial_rings/sage/rings/polynomial/polynomial_modn_dense_ntl.html#sage.rings.polynomial.polynomial_modn_dense_ntl.small_roots">Sage文档</a>
 和 <a
 target="_blank" rel="noopener" href="https://ctf-wiki.org/crypto/asymmetric/rsa/rsa_coppersmith_attack/">Coppersmith基本原理</a>：</p>
@@ -971,17 +973,22 @@ class="math inline">\(\delta=2\)</span>，N的因数<span
 class="math inline">\(p&gt;N^{0.49}\)</span>，因此可求解的根必须小于<span
 class="math inline">\(N^{\frac{\beta^2}\delta}\approx
 N^{0.12}\)</span>，但实际的f是1024位，而N是2048位，不满足需求。</p>
-<p>最后一步需要用Broadcast方法解决，获取多组不同的<span
-class="math inline">\(n_1, n_2,...\)</span>，即可用中国剩余定理得到<span
-class="math inline">\(N=\Pi
-n_i\)</span>。为了得到足够大的N，至少需要获取5个方程。 <span
-class="math display">\[
+<p>最后一步需要用Broadcast方法解决，为了得到足够大的N，至少需要获取5个方程。
+<span class="math display">\[
 \begin{align}
 &amp;f + f^{-1}=c_1  &amp;(mod\ p_1) \\
 &amp;f + f^{-1}=c_2  &amp;(mod\ p_2) \\
-&amp;...... \\ \\
-\implies&amp;f + f^{-1}=C &amp;(mod\ P) \\
-\implies&amp;f^2 - Cf + 1=0 &amp;(mod\ P)
+&amp;...... \\
+\end{align}
+\]</span>
+虽然这些方程在模N意义下不成立，但是我们只关心模P的结果，所以可以强行把<span
+class="math inline">\(2p^d\)</span>扔掉，对N应用中国剩余定理，得到模<span
+class="math inline">\(N=\Pi n_i\)</span>的方程。 <span
+class="math display">\[
+\begin{align}
+&amp;f + f^{-1}=C &amp;(mod\ P) \\
+改为&amp;f + f^{-1}=C &amp;(mod\ N) \\
+\implies&amp;f^2 - Cf + 1=0 &amp;(mod\ N)
 \end{align}
 \]</span> 准备好以上参数后，可以在<a
 target="_blank" rel="noopener" href="https://sagecell.sagemath.org/">Sage Cell
@@ -1001,7 +1008,7 @@ class="math inline">\(n=2\)</span>时，只有341这一个例外。先不考虑3
 <p>接下来考虑特判，实际上只需要在n=341的时候把结果修正为0，即减去
 <code>int(n-341 == 0)</code>，最终得到：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">is_prime = <span class="hljs-keyword">lambda</span> n: <span class="hljs-number">1</span>//((<span class="hljs-number">2</span>**n-<span class="hljs-number">2</span>)%n+<span class="hljs-number">1</span>)-<span class="hljs-number">1</span>//((n-<span class="hljs-number">341</span>)**<span class="hljs-number">2</span>+<span class="hljs-number">1</span>)<br></code></pre></td></tr></table></figure>
-<h3 id="flag2-4">flag2</h3>
+<h3 id="flag2-5">flag2</h3>
 <p>为了计算Pell数，可以利用其通项公式：</p>
 <p><span class="math display">\[
 P_n=\frac{(1+\sqrt2)^n-(1-\sqrt2)^n}{2\sqrt2}
